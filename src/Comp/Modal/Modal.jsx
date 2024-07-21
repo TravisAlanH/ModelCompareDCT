@@ -216,17 +216,17 @@ export default function Modal() {
           <table id="ProcessedTable" className="overflow-auto">
             <tbody className="overflow-auto">
               <tr className="overflow-auto">
-                <td className="font-bold border-2 px-1 w-auto text-nowrap">Input Modal</td>
+                <td className="font-bold border-2 px-1 w-auto text-nowrap">Input Model</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">dct Make 1</td>
-                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Modal 1</td>
+                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Model 1</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Accuracy 1</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Object 1</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">dct Make 2</td>
-                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Modal 2</td>
+                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Model 2</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Accuracy 2</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Object 2</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">dct Make 3</td>
-                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Modal 3</td>
+                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Model 3</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Accuracy 3</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Object 3</td>
               </tr>

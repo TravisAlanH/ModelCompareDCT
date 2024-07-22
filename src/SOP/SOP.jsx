@@ -23,6 +23,6 @@ export default function SOP() {
   );
 
   function StepMarker() {
-    return <p>Current Step</p>;
+    return <p className="text-lg font-bold bg-orange-400 rounded-lg px-3 text-white">Current Step:</p>;
   }
 }

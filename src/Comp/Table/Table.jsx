@@ -14,42 +14,44 @@ export default function Table() {
   console.log(compareColumn);
 
   return (
-    <table className="border-2 mb-10">
-      <thead className="border-2">
-        <tr className="border-2">
-          {columns.map((col) => (
-            <th key={col} className="border-2">
-              <button
-                className="w-full h-full bg-orange-400 rounded-md"
-                onClick={() => {
-                  if (compareColumn === col) {
-                    setCurrentStep(2);
-                    removeCompareColumn();
-                  } else {
-                    setCurrentStep(3);
-                    setCompareColumn(col);
-                  }
-                }}
-              >
-                {col}
-              </button>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => (
-          <tr key={row}>
-            {columns.map((col) => {
-              return (
-                <td key={col + row} className={`border-2 ${compareColumn === col.toString() ? "bg-gray-300" : ""}`}>
-                  {String(data[col + row]).length > 10 ? String(data[col + row]).substring(0, 10) + "..." : data[col + row]}
-                </td>
-              );
-            })}
+    <div className="w-full h-1/2 overflow-auto">
+      <table className="border-2 mb-10">
+        <thead className="border-2">
+          <tr className="border-2">
+            {columns.map((col) => (
+              <th key={col} className="border-2">
+                <button
+                  className="w-full h-full bg-orange-400 rounded-md"
+                  onClick={() => {
+                    if (compareColumn === col) {
+                      setCurrentStep(2);
+                      removeCompareColumn();
+                    } else {
+                      setCurrentStep(3);
+                      setCompareColumn(col);
+                    }
+                  }}
+                >
+                  {col}
+                </button>
+              </th>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row}>
+              {columns.map((col) => {
+                return (
+                  <td key={col + row} className={`border-2 text-nowrap px-2 ${compareColumn === col.toString() ? "bg-gray-300" : ""}`}>
+                    {String(data[col + row]).length > 20 ? String(data[col + row]).substring(0, 20) + "..." : data[col + row]}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

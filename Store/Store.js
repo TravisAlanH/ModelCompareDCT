@@ -42,7 +42,24 @@ let initState = {
   newData: {},
   CompareColumn: "",
   FileName: "",
+  CurrentStep: 0,
 };
+
+export const CurrentStepStore = create(
+  devtools((set) => ({
+    data: initState,
+    setCurrentStep: (Step) => {
+      set((state) => ({
+        data: { ...state.data, CurrentStep: Step },
+      }));
+    },
+    removeCurrentStep: () => {
+      set((state) => ({
+        data: { ...state.data, CurrentStep: 0 },
+      }));
+    },
+  }))
+);
 
 export const FileNameStore = create(
   devtools((set) => ({

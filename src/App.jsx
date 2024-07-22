@@ -11,8 +11,10 @@ import SOP from "./SOP/SOP";
 import SOPButton from "./Comp/Buttons/SOPButton";
 import SOPModal from "./Comp/Modal/SOPModal";
 import Footer from "./Comp/Footer/Footer";
+import { CurrentStepStore } from "../Store/Store";
 
 function App() {
+  const setCurrentStep = CurrentStepStore((state) => state.setCurrentStep);
   const fileName = FileNameStore((state) => state.data.FileName);
   const SelectedColumn = CompareColumnStore((state) => state.data.CompareColumn);
 
@@ -55,26 +57,32 @@ function App() {
         <div className="flex flex-row justify-center gap-5 py-2">
           <ExcelInputOrigin />
           <div className="flex flex-row gap-5 justify-center">
-            {fileName !== "" ? (
-              <div className={`px-3 flex flex-row items-center rounded-md font-bold ${SelectedColumn == "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}>
-                <p>Select The Model Column Below</p>
-              </div>
-            ) : null}
+            {/* {fileName !== "" ? ( */}
+            <div
+              className={`px-3 flex flex-row items-center rounded-md font-bold ${
+                fileName == "" ? "bg-gray-200" : SelectedColumn != "" ? "bg-gray-200" : "bg-orange-400 text-white"
+              }`}
+            >
+              <p>Select The Model Column Below</p>
+            </div>
+            {/* ) : null} */}
             <div>
-              {SelectedColumn !== "" ? (
-                <button
-                  className="bg-orange-400 px-3 flex flex-row items-center text-white rounded-md font-bold h-full"
-                  onClick={() => {
-                    document.getElementById("ProcessModal").style.display = "block";
-                  }}
-                >
-                  Open Process
-                </button>
-              ) : null}
+              {/* {SelectedColumn !== "" ? ( */}
+              <button
+                className={`px-3 h-[3rem] flex flex-row items-center rounded-md font-bold ${SelectedColumn != "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
+                disabled={SelectedColumn == "" ? true : false}
+                onClick={() => {
+                  setCurrentStep(4);
+                  document.getElementById("ProcessModal").style.display = "block";
+                }}
+              >
+                Open Process
+              </button>
+              {/* ) : null} */}
             </div>
           </div>
         </div>
-        <div className="px-5">
+        <div className="px-5 flex flex-row justify-center">
           <Table />
         </div>
         {fileName == "" ? (

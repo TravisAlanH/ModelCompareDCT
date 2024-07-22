@@ -4,6 +4,7 @@ import { originDataStore } from "../../../Store/Store";
 import { FileNameStore } from "../../../Store/Store";
 import LoadingSpinner from "../LoadingSpinner/Spinner";
 import { CompareColumnStore } from "../../../Store/Store";
+import { CurrentStepStore } from "../../../Store/Store";
 
 export default function ExcelInputOrigin() {
   const setOriginData = originDataStore((state) => state.setOriginData);
@@ -13,6 +14,7 @@ export default function ExcelInputOrigin() {
   const removeFileName = FileNameStore((state) => state.removeFileName);
   const [loading, setLoading] = React.useState(false);
   const removeCompareColumn = CompareColumnStore((state) => state.resetCompareColumn);
+  const setCurrentStep = CurrentStepStore((state) => state.setCurrentStep);
 
   //const originData = originDataStore((state) => state.data.originData);
 
@@ -52,6 +54,7 @@ export default function ExcelInputOrigin() {
           <button
             className=""
             onClick={() => {
+              setCurrentStep(1);
               removeOriginData();
               removeFileName();
               removeCompareColumn();
@@ -65,8 +68,10 @@ export default function ExcelInputOrigin() {
       <div>
         <button
           onClick={() => {
+            setCurrentStep(2);
             document.getElementById("OriginInput").click();
           }}
+          disabled={fileName != "" ? true : false}
           className={` px-3 flex flex-row items-center rounded-md font-bold h-full ${fileName == "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
         >
           Open File

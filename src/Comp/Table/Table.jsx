@@ -1,5 +1,6 @@
 import React from "react";
 import { originDataStore, CompareColumnStore } from "../../../Store/Store";
+import { CurrentStepStore } from "../../../Store/Store";
 
 export default function Table() {
   const data = originDataStore((state) => state.data.originData);
@@ -8,6 +9,7 @@ export default function Table() {
   const removeCompareColumn = CompareColumnStore((state) => state.resetCompareColumn);
   const rows = Array.from(new Set(Object.keys(data).map((key) => key.match(/\d+/)[0])));
   const columns = Array.from(new Set(Object.keys(data).map((key) => key.match(/[A-Z]+/)[0])));
+  const setCurrentStep = CurrentStepStore((state) => state.setCurrentStep);
 
   console.log(compareColumn);
 
@@ -21,8 +23,10 @@ export default function Table() {
                 className="w-full h-full bg-orange-400 rounded-md"
                 onClick={() => {
                   if (compareColumn === col) {
+                    setCurrentStep(2);
                     removeCompareColumn();
                   } else {
+                    setCurrentStep(3);
                     setCompareColumn(col);
                   }
                 }}

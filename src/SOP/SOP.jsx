@@ -26,8 +26,12 @@ export default function SOP() {
 
   function StepMarker() {
     return (
-      <div className="bg-orange-400 rounded-lg px-3 min-h-[3rem] flex flex-col justify-center">
-        {fileName != "" ? <p className="text-lg font-bold text-white ">Current Step:</p> : null}
+      <div>
+        {fileName != "" ? (
+          <div className="bg-orange-400 rounded-lg px-3 min-h-[3rem] flex flex-col justify-center">
+            <p className="text-lg font-bold text-white ">Current Step:</p>
+          </div>
+        ) : null}
       </div>
     );
   }

@@ -6,9 +6,11 @@ import Step4 from "../SOP/Step4.png";
 import Step5 from "../SOP/Step5.png";
 import Step6 from "../SOP/Step6.png";
 import { CurrentStepStore } from "../../Store/Store";
+import { FileNameStore } from "../../Store/Store";
 
 export default function SOP() {
   const Step = CurrentStepStore((state) => state.data.CurrentStep);
+  const fileName = FileNameStore((state) => state.data.FileName);
 
   return (
     <div className="flex flex-col">
@@ -23,6 +25,10 @@ export default function SOP() {
   );
 
   function StepMarker() {
-    return <p className="text-lg font-bold bg-orange-400 rounded-lg px-3 text-white">Current Step:</p>;
+    return (
+      <div className="bg-orange-400 rounded-lg px-3 min-h-[3rem] flex flex-col justify-center">
+        {fileName != "" ? <p className="text-lg font-bold text-white ">Current Step:</p> : null}
+      </div>
+    );
   }
 }

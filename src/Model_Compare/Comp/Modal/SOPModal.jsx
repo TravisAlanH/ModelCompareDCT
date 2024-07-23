@@ -1,5 +1,5 @@
 import React from "react";
-import SOP from "../../SOP/SOP";
+import SOP from "../../../Model_Compare/SOP/SOP";
 
 export default function SOPModal() {
   return (

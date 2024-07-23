@@ -1,13 +1,13 @@
 import React from "react";
 import "./Modal.css";
-import { originDataStore } from "../../../Store/Store";
-import { CompareColumnStore } from "../../../Store/Store";
-import { ModelMake } from "../../MLT";
-import { FileNameStore } from "../../../Store/Store";
+import { originDataStore } from "../../../../Store/Store";
+import { CompareColumnStore } from "../../../../Store/Store";
+import { ModelMake } from "../../../Functions/LenenshteinDistance/MLT";
+import { FileNameStore } from "../../../../Store/Store";
 import LoadingSpinner from "../LoadingSpinner/Spinner";
-import findTopMatches from "../../Functions/LenenshteinDistance";
-import SortFinishedTable from "../Inputs/Sort/SortFinishedTable";
-import { SortedStore } from "../../../Store/Store";
+import findTopMatches from "../../../Functions/LenenshteinDistance/LenenshteinDistance";
+import SortFinishedTable from "../Sort/SortFinishedTable";
+import { SortedStore } from "../../../../Store/Store";
 
 export default function Modal() {
   const data = originDataStore((state) => state.data.originData);

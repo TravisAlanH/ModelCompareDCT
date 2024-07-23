@@ -1,10 +1,10 @@
 import React from "react";
 import * as XLSX from "xlsx";
-import { originDataStore } from "../../../Store/Store";
-import { FileNameStore } from "../../../Store/Store";
+import { originDataStore } from "../../../../Store/Store";
+import { FileNameStore } from "../../../../Store/Store";
 import LoadingSpinner from "../LoadingSpinner/Spinner";
-import { CompareColumnStore } from "../../../Store/Store";
-import { CurrentStepStore } from "../../../Store/Store";
+import { CompareColumnStore } from "../../../../Store/Store";
+import { CurrentStepStore } from "../../../../Store/Store";
 
 export default function ExcelInputOrigin() {
   const setOriginData = originDataStore((state) => state.setOriginData);

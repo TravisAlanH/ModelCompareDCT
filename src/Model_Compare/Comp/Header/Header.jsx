@@ -1,6 +1,6 @@
 import React from "react";
-import Logo from "../../Assets/Logo.png";
-import { FileNameStore } from "../../../Store/Store";
+import Logo from "../../../Assets/Logo.png";
+import { FileNameStore } from "../../../../Store/Store";
 
 export default function Header() {
   const fileName = FileNameStore((state) => state.data.FileName);

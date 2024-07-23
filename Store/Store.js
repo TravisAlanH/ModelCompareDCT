@@ -1,42 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-// Initial state data
-// let initialState = {
-//   count: 0,
-//   apples: 0,
-// };
-
-// // Zustand store for count
-// export const useCountStore = create(
-//   devtools((set) => ({
-//     data: initialState,
-//     increase: () =>
-//       set((state) => ({
-//         data: { ...state.data, count: state.data.count + 1 },
-//       })),
-//     decrease: () =>
-//       set((state) => ({
-//         data: { ...state.data, count: state.data.count - 1 },
-//       })),
-//   }))
-// );
-
-// // Zustand store for apples
-// export const useAppleState = create(
-//   devtools((set) => ({
-//     data: initialState,
-//     increaseApples: () =>
-//       set((state) => ({
-//         data: { ...state.data, apples: state.data.apples + 1 },
-//       })),
-//     decreaseApples: () =>
-//       set((state) => ({
-//         data: { ...state.data, apples: state.data.apples - 1 },
-//       })),
-//   }))
-// );
-
 let initState = {
   originData: {},
   newData: {},

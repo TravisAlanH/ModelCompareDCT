@@ -1,6 +1,6 @@
 import React from "react";
-import { originDataStore, CompareColumnStore } from "../../../Store/Store";
-import { CurrentStepStore } from "../../../Store/Store";
+import { originDataStore, CompareColumnStore } from "../../../../Store/Store";
+import { CurrentStepStore } from "../../../../Store/Store";
 
 export default function Table() {
   const data = originDataStore((state) => state.data.originData);

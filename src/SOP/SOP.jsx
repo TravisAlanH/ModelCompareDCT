@@ -108,7 +108,7 @@ export default function SOP() {
   return (
     <div className="flex flex-col gap-4">
       {SOPData.map((data, index) => {
-        return <div>{StepLayout(index, data)}</div>;
+        return <div key={index}>{StepLayout(index, data)}</div>;
       })}
     </div>
   );
@@ -123,9 +123,9 @@ export default function SOP() {
         <div>
           {data.BulletPoints.length > 0 ? (
             <div className="flex flex-col gap-2">
-              {data.BulletPoints.map((line) => {
+              {data.BulletPoints.map((line, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     {StepBulletPoints(line.Main)}
                     {line.Additional != "" ? StepBulletAddition(line.Additional) : null}
                   </div>
@@ -193,9 +193,9 @@ export default function SOP() {
   function StepBulletAddition(Additional) {
     return (
       <div className="w-[40rem]">
-        {Additional.map((line) => {
+        {Additional.map((line, index) => {
           return (
-            <div className="flex flex-row items-center gap-4 pl-[6rem] pt-2">
+            <div key={index} className="flex flex-row items-center gap-4 pl-[6rem] pt-2">
               <div className="w-[.3rem] h-[.3rem] bg-[#918787] rounded-full"></div>
               <p>{line}</p>
             </div>

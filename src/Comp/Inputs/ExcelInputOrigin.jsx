@@ -50,9 +50,9 @@ export default function ExcelInputOrigin() {
   return (
     <div className="flex flex-row gap-5 h-[3rem]">
       {fileName != "" ? (
-        <div className="border-2 border-black rounded-md px-3 flex flex-row items-center">
+        <div>
           <button
-            className=""
+            className="border-2 border-black rounded-md h-[3rem] px-3 flex flex-row items-center"
             onClick={() => {
               setCurrentStep(1);
               removeOriginData();

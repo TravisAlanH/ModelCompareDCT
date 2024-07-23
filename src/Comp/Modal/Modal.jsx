@@ -6,7 +6,6 @@ import { ModelMake } from "../../MLT";
 import { FileNameStore } from "../../../Store/Store";
 import LoadingSpinner from "../LoadingSpinner/Spinner";
 import findTopMatches from "../../Functions/LenenshteinDistance";
-import { startName } from "../../Functions/StartName";
 import SortFinishedTable from "../Inputs/Sort/SortFinishedTable";
 import { SortedStore } from "../../../Store/Store";
 
@@ -16,7 +15,6 @@ export default function Modal() {
   const compareColumn = CompareColumnStore((state) => state.data.CompareColumn);
   const [loading, setLoading] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(null);
-  const setSorted = SortedStore((state) => state.setSorted);
   const SortedBy = SortedStore((state) => state.data.sortedby);
   const SortedOrder = SortedStore((state) => state.data.sortedOrder);
   const [reload, setReload] = React.useState(false);
@@ -84,10 +82,16 @@ export default function Modal() {
     return modelStringArray;
   }
 
-  function fillMatches() {
+  console.log("Table", tableData);
+
+  async function fillMatches() {
     const ModelString = createModelStringArray();
-    tableData.forEach((element, index) => {
+
+    for (let index = 0; index < tableData.length; index++) {
+      const element = tableData[index];
       let topMatches = findTopMatches(String(element.Model), ModelString, 3);
+
+      // Update the table data
       setTableData((prev) => {
         return prev.map((row) => {
           if (row.Model === element.Model) {
@@ -111,7 +115,11 @@ export default function Modal() {
           return row;
         });
       });
-    });
+
+      // Force a page update (React will handle re-rendering)
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    }
+
     setLoading(false);
   }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import StepZero from "../SOP/Step0_0.png";
 import StepOne from "../SOP/Step1_1.png";
 import StepTwo from "../SOP/Step2_2.png";
 import StepThree from "../SOP/Step3_3.png";
@@ -20,7 +21,8 @@ export default function SOP() {
         { Main: "Object Typing is Provided for dcTrack Mached Data", Additional: "" },
       ],
       Note: "*Note: Large data sets may require isolating the Model column, or removing excess sheets from your workbook, before processing. Making these changes greatly reduces processing time.",
-      img: "",
+      img: StepZero,
+      imgNote: `**This SOP is available for reference at any time by selecting the "?" in the top right corner of the tool.`,
     },
     {
       Step: 2,
@@ -38,6 +40,7 @@ export default function SOP() {
       ],
       Note: "*Note: No data is saved or maintained after closing this tool",
       img: StepOne,
+      imgNote: "",
     },
     {
       Step: 3,
@@ -51,6 +54,7 @@ export default function SOP() {
       ],
       Note: "*Note: Depending on Data size this may take up to 10 Seconds for column to highlight",
       img: StepTwo,
+      imgNote: "",
     },
     {
       Step: 4,
@@ -64,6 +68,7 @@ export default function SOP() {
       ],
       Note: "*Note: Duplicate Entries are only removed from the Preview Window, the original data is not altered.",
       img: StepThree,
+      imgNote: "",
     },
     {
       Step: 5,
@@ -83,6 +88,7 @@ export default function SOP() {
       ],
       Note: "",
       img: StepFour,
+      imgNote: "",
     },
     {
       Step: 6,
@@ -95,6 +101,7 @@ export default function SOP() {
       ],
       Note: "",
       img: Step5_5,
+      imgNote: "",
     },
   ];
 
@@ -128,6 +135,7 @@ export default function SOP() {
           ) : null}
         </div>
         <div>{data.Note != "" ? <div className="flex flex-col gap-2">{StepNote(data.Note)}</div> : null}</div>
+        {data.imgNote != "" ? <div>{StepImageNote(data.imgNote)}</div> : null}
         <div className="flex flex-row justify-center">{data.img != "" ? StepImage(data.img) : null}</div>
       </div>
     );
@@ -162,6 +170,14 @@ export default function SOP() {
     return (
       <div className="flex flex-row items-center gap-2 pl-[4rem] w-[44rem]">
         <p>{line}</p>
+      </div>
+    );
+  }
+
+  function StepImageNote(line) {
+    return (
+      <div className="flex flex-row items-center gap-2 pl-[4rem] w-[44rem]">
+        <p className="text-sm">{line}</p>
       </div>
     );
   }

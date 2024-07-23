@@ -16,6 +16,7 @@ export default function Modal() {
   const compareColumn = CompareColumnStore((state) => state.data.CompareColumn);
   const [loading, setLoading] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(null);
+  const setSorted = SortedStore((state) => state.setSorted);
   const SortedBy = SortedStore((state) => state.data.sortedby);
   const SortedOrder = SortedStore((state) => state.data.sortedOrder);
   const [reload, setReload] = React.useState(false);
@@ -172,11 +173,11 @@ export default function Modal() {
           </span>
         </div>
         <div className="overflow-auto">
-          <table id="ProcessedTable" className="overflow-auto">
-            <tbody className="overflow-auto">
-              <tr className="overflow-auto">
-                <td className="font-bold border-2 px-1 w-auto text-nowrap">Input Model</td>
-                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Make 1</td>
+          <table id="ProcessedTable" className="">
+            <tbody className="">
+              <tr>
+                <td className={`font-bold border-2 px-1 w-auto text-nowrap bg-white sticky left-0`}>Input Model</td>
+                <td className="font-bold border-2 px-1 w-auto text-nowrap ">dcT Make 1</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Model 1</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Accuracy 1</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Object 1</td>
@@ -226,7 +227,9 @@ export default function Modal() {
                       }
                     }}
                   >
-                    <td className="border-b-2 px-1 w-auto text-nowrap border-r-2">{row.Model}</td>
+                    <td className={`border-b-2 px-1 w-auto text-nowrap border-r-2 sticky left-0 ${selectedRow === index ? "bg-gray-300" : "bg-white"}`}>
+                      {row.Model}
+                    </td>
                     <td className="border-b-2 px-1 w-auto text-nowrap ">{row.dctMakeOne || "..."}</td>
                     <td className="border-b-2 px-1 w-auto text-nowrap ">{row.dctModalOne || "..."}</td>
                     <td className="border-b-2 px-1 w-auto text-nowrap ">{row.accuracyOne || "..."}</td>

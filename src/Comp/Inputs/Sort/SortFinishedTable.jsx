@@ -43,14 +43,15 @@ export default function SortFinishedTable() {
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-flex items-center text-left">
+      {/* Dropdown Button */}
       <button
-        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        className={`flex flex-row justify-between items-center w-[8rem] h-[3rem] px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 ${
-          SortedBy != "" ? "outline-none ring-2 ring-offset-2 ring-orange-500" : ""
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggles dropdown visibility
+        className={`flex flex-row justify-between items-center w-[9rem] h-[3rem] px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 ${
+          SortedBy ? "outline-none ring-2 ring-offset-2 ring-orange-500" : "" // Adds ring effect if SortedBy is not empty
         }`}
       >
-        {SortName}
+        {SortName} {/* Displays the current sorting name */}
         <svg className="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path
             fillRule="evenodd"
@@ -60,16 +61,32 @@ export default function SortFinishedTable() {
         </svg>
       </button>
 
+      {/* Clear Sorting Button */}
+      <button
+        className="w-[9rem] h-[3rem] px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 ml-2" // Added ml-2 for margin
+        onClick={() => {
+          setSorted("", 0); // Clears the sorting
+          setSortName(`Sort Table`);
+          setIsDropdownOpen(false);
+        }}
+      >
+        Clear Sorting
+      </button>
+
+      {/* Dropdown Menu */}
       {isDropdownOpen && (
-        <ul className="absolute right-0 w-[10rem] mt-2 bg-white border border-gray-300 rounded-md shadow-lg">
+        <ul className="absolute left-0 top-full mt-2 w-[10rem] bg-white border border-gray-300 rounded-md shadow-lg">
+          {/* Dropdown Items */}
           {["Input Model", "dcT Make 1", "dcT Model 1", "Accuracy 1", "Object 1"].map((item) => (
             <li
               key={item}
-              onClick={() => handleOptionClick(item)}
-              className="flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+              onClick={() => handleOptionClick(item)} // Handles option click
+              className={`flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer ${
+                SortName === item ? "bg-gray-200" : "" // Highlights selected item
+              }`}
             >
               {item}
-              {/* {SortName === item && <span>{SortedOrder === 1 ? `▲` : SortedOrder === -1 ? `▬` : ""}</span>} */}
+              {/* Displaying the sort direction indicator */}
               {SortName === item ? <span>{SortedOrder === 1 ? `▲` : SortedOrder === -1 ? `▬` : ""}</span> : <span>{`▽`}</span>}
             </li>
           ))}

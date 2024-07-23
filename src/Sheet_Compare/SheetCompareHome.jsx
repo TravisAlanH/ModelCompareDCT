@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 
 export default function SheetCompareHome({ setViewPage }) {
   return (
@@ -11,6 +12,8 @@ export default function SheetCompareHome({ setViewPage }) {
         <p className="text-xl font-bold">BUILD IN PROGRESS...</p>
         <p className="font-bold">*** Click Sunbird Logo to go Home ***</p>
       </div>
+
+      <Footer />
     </div>
   );
 }

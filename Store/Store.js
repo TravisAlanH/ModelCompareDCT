@@ -43,7 +43,25 @@ let initState = {
   CompareColumn: "",
   FileName: "",
   CurrentStep: 0,
+  sortedby: "",
+  sortedOrder: 0,
 };
+
+export const SortedStore = create(
+  devtools((set) => ({
+    data: initState,
+    setSorted: (sortedby, sortedOrder) => {
+      set((state) => ({
+        data: { ...state.data, sortedby: sortedby, sortedOrder: sortedOrder },
+      }));
+    },
+    removeSorted: () => {
+      set((state) => ({
+        data: { ...state.data, sortedby: "", sortedOrder: 0 },
+      }));
+    },
+  }))
+);
 
 export const CurrentStepStore = create(
   devtools((set) => ({

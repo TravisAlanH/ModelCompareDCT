@@ -98,8 +98,6 @@ export default function SOP() {
     },
   ];
 
-  console.log("len", SOPData.length);
-
   return (
     <div className="flex flex-col gap-4">
       {SOPData.map((data, index) => {
@@ -109,7 +107,6 @@ export default function SOP() {
   );
 
   function StepLayout(index, data) {
-    console.log("data", data, index);
     return (
       <div className="w-50rem bg-[#f1f5f9] rounded-xl flex flex-col gap-5 p-3">
         <div className="flex flex-row gap-3 items-center">

@@ -7,17 +7,22 @@ import { FileNameStore } from "../../../Store/Store";
 import LoadingSpinner from "../LoadingSpinner/Spinner";
 import findTopMatches from "../../Functions/LenenshteinDistance";
 import { startName } from "../../Functions/StartName";
+import SortFinishedTable from "../Inputs/Sort/SortFinishedTable";
+import { SortedStore } from "../../../Store/Store";
 
 export default function Modal() {
   const data = originDataStore((state) => state.data.originData);
   const fileName = FileNameStore((state) => state.data.FileName);
   const compareColumn = CompareColumnStore((state) => state.data.CompareColumn);
   const [loading, setLoading] = React.useState(false);
-  console.log(loading);
-
   const [selectedRow, setSelectedRow] = React.useState(null);
+  const SortedBy = SortedStore((state) => state.data.sortedby);
+  const SortedOrder = SortedStore((state) => state.data.sortedOrder);
+  const [reload, setReload] = React.useState(false);
 
-  console.log(data);
+  React.useEffect(() => {
+    setReload(!reload);
+  }, [SortedOrder, SortedBy]);
 
   const [tableData, setTableData] = React.useState(
     Array.from(
@@ -25,7 +30,7 @@ export default function Modal() {
         Object.keys(data)
           .filter((key) => key.includes(compareColumn))
           .map((key) => ({
-            Modal: data[key],
+            Model: data[key],
             dctModalOne: "",
             dctMakeOne: "",
             accuracyOne: "",
@@ -36,7 +41,7 @@ export default function Modal() {
             dctMakeThree: "",
             accuracyThree: "",
           }))
-          .map((item) => [item.Modal, item]) // Convert each item to a key-value pair
+          .map((item) => [item.Model, item]) // Convert each item to a key-value pair
       ).values() // Extract unique values from the Map
     )
   );
@@ -48,7 +53,7 @@ export default function Modal() {
           Object.keys(data)
             .filter((key) => key.includes(compareColumn))
             .map((key) => ({
-              Modal: data[key],
+              Model: data[key],
               dctModalOne: "",
               dctMakeOne: "",
               accuracyOne: "",
@@ -62,64 +67,13 @@ export default function Modal() {
               accuracyThree: "",
               ObjectThree: "",
             }))
-            .map((item) => [item.Modal, item]) // Convert each item to a key-value pair
+            .map((item) => [item.Model, item]) // Convert each item to a key-value pair
         ).values() // Extract unique values from the Map
       )
     );
   }, [data, compareColumn]);
 
-  console.log("tableData", tableData);
-
-  // function levenshteinDistance(str1, str2) {
-  //   if (typeof str1 !== "string" || typeof str2 !== "string") {
-  //     throw new TypeError("Both arguments must be strings.");
-  //   }
-  //   str1 = str1.toLowerCase();
-  //   str2 = str2.toLowerCase();
-
-  //   const lenStr1 = str1.length + 1;
-  //   const lenStr2 = str2.length + 1;
-
-  //   const matrix = Array.from({ length: lenStr1 }, () => Array(lenStr2).fill(0));
-
-  //   for (let i = 0; i < lenStr1; i++) {
-  //     matrix[i][0] = i;
-  //   }
-  //   for (let j = 0; j < lenStr2; j++) {
-  //     matrix[0][j] = j;
-  //   }
-
-  //   for (let i = 1; i < lenStr1; i++) {
-  //     for (let j = 1; j < lenStr2; j++) {
-  //       const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
-  //       matrix[i][j] = Math.min(
-  //         matrix[i - 1][j] + 1, // Deletion
-  //         matrix[i][j - 1] + 1, // Insertion
-  //         matrix[i - 1][j - 1] + cost // Substitution
-  //       );
-  //     }
-  //   }
-
-  //   return matrix[lenStr1 - 1][lenStr2 - 1];
-  // }
-
-  // function similarityPercentage(str1, str2) {
-  //   const levDistance = levenshteinDistance(str1, str2);
-  //   const maxLen = Math.max(str1.length, str2.length);
-  //   const similarity = (1 - levDistance / maxLen) * 100;
-  //   return similarity;
-  // }
-
-  // function findTopMatches(target, strings, topN = 3) {
-  //   const matches = strings.map((s) => {
-  //     const sim = similarityPercentage(target, s);
-  //     return { string: s, similarity: sim };
-  //   });
-
-  //   matches.sort((a, b) => b.similarity - a.similarity);
-
-  //   return matches.slice(0, topN);
-  // }
+  // console.log("tableData", tableData);
 
   function createModelStringArray() {
     let modelStringArray = [];
@@ -129,27 +83,13 @@ export default function Modal() {
     return modelStringArray;
   }
 
-  function createMakeRemovedModelStringArray() {
-    let makeRemovedStringArray = [];
-    Object.keys(ModelMake).forEach((key) => {
-      if (key in startName) {
-      }
-    });
-  }
-
-  // export const ModelMake = {
-  //   "ActivSpan 4200 RS": {
-  //     "Make": "Ciena",
-  //     "ObjectType": "NETWORK-CHASSIS-RACKABLE"
-  //   },
-
   function fillMatches() {
     const ModelString = createModelStringArray();
-    tableData.forEach((element) => {
-      let topMatches = findTopMatches(String(element.Modal), ModelString, 3);
+    tableData.forEach((element, index) => {
+      let topMatches = findTopMatches(String(element.Model), ModelString, 3);
       setTableData((prev) => {
         return prev.map((row) => {
-          if (row.Modal === element.Modal) {
+          if (row.Model === element.Model) {
             return {
               ...row,
               dctModalOne: ModelMake[topMatches[0].string].Model,
@@ -164,6 +104,7 @@ export default function Modal() {
               dctMakeThree: ModelMake[topMatches[2].string].Make,
               accuracyThree: parseFloat(topMatches[2].similarity).toFixed(2),
               ObjectThree: ModelMake[topMatches[2].string].ObjectType,
+              OrginOrder: index,
             };
           }
           return row;
@@ -173,7 +114,7 @@ export default function Modal() {
     setLoading(false);
   }
 
-  console.log("tableData", tableData);
+  // console.log("tableData", tableData);
 
   return (
     <div id="ProcessModal" className="modal">
@@ -193,6 +134,7 @@ export default function Modal() {
             >
               Begin Process
             </button>
+
             <button
               className={`px-3 flex flex-row items-center rounded-md font-bold ${
                 !tableData || tableData.length === 0 || tableData[0].dctMakeOne ? "bg-orange-400 text-white" : "bg-gray-200"
@@ -218,6 +160,7 @@ export default function Modal() {
             >
               Export
             </button>
+            <SortFinishedTable />
           </div>
           <span
             className="close"
@@ -233,21 +176,44 @@ export default function Modal() {
             <tbody className="overflow-auto">
               <tr className="overflow-auto">
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Input Model</td>
-                <td className="font-bold border-2 px-1 w-auto text-nowrap">dct Make 1</td>
+                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Make 1</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Model 1</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Accuracy 1</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Object 1</td>
-                <td className="font-bold border-2 px-1 w-auto text-nowrap">dct Make 2</td>
+                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Make 2</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Model 2</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Accuracy 2</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Object 2</td>
-                <td className="font-bold border-2 px-1 w-auto text-nowrap">dct Make 3</td>
+                <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Make 3</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">dcT Model 3</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Accuracy 3</td>
                 <td className="font-bold border-2 px-1 w-auto text-nowrap">Object 3</td>
               </tr>
               {tableData
-                // .sort((a, b) => b.accuracyOne - a.accuracyOne)
+                .sort((a, b) => {
+                  if (SortedOrder === 0) {
+                    return a.OrginOrder - b.OrginOrder;
+                  }
+                  const aValue = a[SortedBy];
+                  const bValue = b[SortedBy];
+
+                  if (SortedBy === "accuracyOne") {
+                    if (SortedOrder === 1) {
+                      return parseFloat(bValue) - parseFloat(aValue);
+                    } else if (SortedOrder === -1) {
+                      return parseFloat(aValue) - parseFloat(bValue);
+                    }
+                  }
+
+                  if (typeof aValue === "string" && typeof bValue === "string") {
+                    if (SortedOrder === 1) {
+                      return bValue.localeCompare(aValue);
+                    } else if (SortedOrder === -1) {
+                      return aValue.localeCompare(bValue);
+                    }
+                  }
+                  return 0;
+                })
                 .map((row, index) => (
                   <tr
                     key={index}
@@ -260,7 +226,7 @@ export default function Modal() {
                       }
                     }}
                   >
-                    <td className="border-b-2 px-1 w-auto text-nowrap border-r-2">{row.Modal}</td>
+                    <td className="border-b-2 px-1 w-auto text-nowrap border-r-2">{row.Model}</td>
                     <td className="border-b-2 px-1 w-auto text-nowrap ">{row.dctMakeOne || "..."}</td>
                     <td className="border-b-2 px-1 w-auto text-nowrap ">{row.dctModalOne || "..."}</td>
                     <td className="border-b-2 px-1 w-auto text-nowrap ">{row.accuracyOne || "..."}</td>

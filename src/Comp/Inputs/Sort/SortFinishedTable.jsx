@@ -75,7 +75,7 @@ export default function SortFinishedTable() {
 
       {/* Dropdown Menu */}
       {isDropdownOpen && (
-        <ul className="absolute left-0 top-full mt-2 w-[10rem] bg-white border border-gray-300 rounded-md shadow-lg">
+        <ul className="absolute left-0 top-full mt-2 w-[10rem] bg-white border border-gray-300 rounded-md shadow-lg z-10">
           {/* Dropdown Items */}
           {["Input Model", "dcT Make 1", "dcT Model 1", "Accuracy 1", "Object 1"].map((item) => (
             <li

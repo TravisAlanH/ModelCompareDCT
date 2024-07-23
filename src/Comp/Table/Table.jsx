@@ -14,7 +14,7 @@ export default function Table() {
   console.log(compareColumn);
 
   return (
-    <div className="w-full h-1/2 overflow-auto">
+    <div className="w-full h-1/2 overflow-auto flex flex-row">
       <table className="border-2 mb-10">
         <thead className="border-2">
           <tr className="border-2">

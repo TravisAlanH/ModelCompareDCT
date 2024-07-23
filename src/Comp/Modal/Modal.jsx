@@ -208,9 +208,9 @@ export default function Modal() {
 
                   if (typeof aValue === "string" && typeof bValue === "string") {
                     if (SortedOrder === 1) {
-                      return bValue.localeCompare(aValue);
+                      return bValue.localeCompare(String(aValue));
                     } else if (SortedOrder === -1) {
-                      return aValue.localeCompare(bValue);
+                      return aValue.localeCompare(String(bValue));
                     }
                   }
                   return 0;

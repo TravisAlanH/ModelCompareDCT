@@ -9,14 +9,14 @@ import Modal from "./Comp/Modal/Modal";
 import SOPModal from "./Comp/Modal/SOPModal";
 import Footer from "./Comp/Footer/Footer";
 
-export default function ModelCompareHome() {
+export default function ModelCompareHome({ setViewPage }) {
   const setCurrentStep = CurrentStepStore((state) => state.setCurrentStep);
   const fileName = FileNameStore((state) => state.data.FileName);
   const SelectedColumn = CompareColumnStore((state) => state.data.CompareColumn);
 
   return (
     <>
-      <Header />
+      <Header setViewPage={setViewPage} />
       {fileName != "" ? <SOPButton /> : null}
       <div className="flex flex-col">
         <div className="flex flex-row justify-center gap-5 py-2">

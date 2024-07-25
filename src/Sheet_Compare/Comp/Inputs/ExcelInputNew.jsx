@@ -75,7 +75,7 @@ export default function ExcelInputNew() {
               document.getElementById("OriginInputNew").click();
             }}
             disabled={fileNameNew != "" ? true : false}
-            className={` px-3 flex flex-row items-center rounded-md font-bold h-full ${fileNameNew == "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
+            className={` px-3 flex flex-row items-center rounded-md font-bold h-[3rem] ${fileNameNew == "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
           >
             Open New File
           </button>

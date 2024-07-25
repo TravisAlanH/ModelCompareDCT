@@ -6,6 +6,7 @@ import OldTable from "./Comp/Table/OldTable";
 import ExcelInputNew from "./Comp/Inputs/ExcelInputNew";
 import NewTable from "./Comp/Table/NewTable";
 import { SheetCompareStore } from "../../Store/Store";
+import Modal from "./Comp/Modal/Modal";
 
 export default function SheetCompareHome({ setViewPage }) {
   // Destructure the state from SheetCompareStore to ensure consistent Hook usage
@@ -55,7 +56,7 @@ export default function SheetCompareHome({ setViewPage }) {
           </div>
         </div>
       </div>
-
+      {isAnyFileNameEmpty ? null : <Modal />}
       <Footer />
     </div>
   );

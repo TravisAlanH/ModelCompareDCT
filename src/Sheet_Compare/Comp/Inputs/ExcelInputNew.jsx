@@ -49,48 +49,51 @@ export default function ExcelInputNew() {
   };
 
   return (
-    <div className="flex flex-row gap-5 h-[3rem]">
-      {fileNameNew != "" ? (
+    <div className="flex flex-row justify-between h-[3rem]">
+      <div className="flex flex-row gap-5">
+        {fileNameNew != "" ? (
+          <div>
+            <button
+              className="border-2 border-black rounded-md h-[3rem] px-3 flex flex-row items-center"
+              onClick={() => {
+                // setCurrentStep(1);
+                removeNewData();
+                removeNewFileName();
+                removeNewCompareColumn();
+                setShowColumns(0);
+                document.getElementById("OriginInput").value = "";
+              }}
+            >
+              Clear New File
+            </button>
+          </div>
+        ) : null}
         <div>
           <button
-            className="border-2 border-black rounded-md h-[3rem] px-3 flex flex-row items-center"
             onClick={() => {
-              // setCurrentStep(1);
-              removeNewData();
-              removeNewFileName();
-              removeNewCompareColumn();
-              setShowColumns(0);
-              document.getElementById("OriginInput").value = "";
+              // setCurrentStep(2);
+              document.getElementById("OriginInputNew").click();
             }}
+            disabled={fileNameNew != "" ? true : false}
+            className={` px-3 flex flex-row items-center rounded-md font-bold h-full ${fileNameNew == "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
           >
-            Clear New File
+            Open New File
           </button>
+          <input
+            id="OriginInputNew"
+            type="file"
+            accept=".xlsx"
+            className="hidden"
+            onChange={(e) => {
+              setLoading(true);
+              setTimeout(() => {
+                handleFile(e);
+              }, 1000);
+            }}
+          />
         </div>
-      ) : null}
-      <div>
-        <button
-          onClick={() => {
-            // setCurrentStep(2);
-            document.getElementById("OriginInputNew").click();
-          }}
-          disabled={fileNameNew != "" ? true : false}
-          className={` px-3 flex flex-row items-center rounded-md font-bold h-full ${fileNameNew == "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
-        >
-          Open New File
-        </button>
-        <input
-          id="OriginInputNew"
-          type="file"
-          accept=".xlsx"
-          className="hidden"
-          onChange={(e) => {
-            setLoading(true);
-            setTimeout(() => {
-              handleFile(e);
-            }, 1000);
-          }}
-        />
       </div>
+      <div className="flex flex-col justify-center pr-5">{fileNameNew != "" ? <p className="text-md font-bold">{fileNameNew}</p> : null}</div>
       {loading ? <LoadingSpinner /> : null}
     </div>
   );

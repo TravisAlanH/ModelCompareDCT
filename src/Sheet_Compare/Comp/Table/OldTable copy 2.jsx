@@ -7,7 +7,6 @@ export default function OldTable() {
   const compareColumn = SheetCompareStore((state) => state.data.oldColumnCompare);
   const setCompareColumn = SheetCompareStore((state) => state.setOldColumnCompare);
   const removeCompareColumn = SheetCompareStore((state) => state.removeOldColumnCompare);
-
   const rows = Array.from(new Set(Object.keys(data).map((key) => key.match(/\d+/)[0])));
   const columns = Array.from(new Set(Object.keys(data).map((key) => key.match(/[A-Z]+/)[0])));
   const showColumns = SheetCompareStore((state) => state.data.oldVisableTableShow);
@@ -15,6 +14,8 @@ export default function OldTable() {
   const [counter, setCounter] = useState(0);
   const lastScrollTop = useRef(0);
   const scrollableDivRef = useRef(null);
+
+  console.log(counter);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,8 +32,6 @@ export default function OldTable() {
         // Scrolling up
         if (counter > 0) {
           setCounter((prevCounter) => prevCounter - 1);
-        } else if (scrollTop === 0) {
-          setCounter(0);
         }
       }
 
@@ -73,13 +72,15 @@ export default function OldTable() {
           </tr>
         </thead>
         <tbody>
-          {rows.slice(0, counter * 2 + 50).map((row, index) => (
+          {rows.slice(0, counter * 2 + 50).map((row) => (
             <tr key={row}>
-              {columns.slice(showColumns, showColumns + 6).map((col) => (
-                <td key={col + row} className={`border-2 text-nowrap px-2 h-[1.5rem] ${compareColumn === col.toString() ? "bg-gray-300" : ""}`}>
-                  {String(data[col + row]).length > 20 ? String(data[col + row]).substring(0, 20) + "..." : data[col + row]}
-                </td>
-              ))}
+              {columns.slice(showColumns, showColumns + 6).map((col) => {
+                return (
+                  <td key={col + row} className={`border-2 text-nowrap px-2 h-[1.5rem] ${compareColumn === col.toString() ? "bg-gray-300" : ""}`}>
+                    {String(data[col + row]).length > 20 ? String(data[col + row]).substring(0, 20) + "..." : data[col + row]}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>

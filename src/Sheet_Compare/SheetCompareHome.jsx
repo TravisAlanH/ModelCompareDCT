@@ -17,11 +17,11 @@ export default function SheetCompareHome({ setViewPage }) {
         <p className="font-bold">*** Click Sunbird Logo to go Home ***</p>
       </div>
       <div className="flex flex-row w-full justify-center gap-4">
-        <div className="flex flex-col border-2 w-[40%] h-[30rem]">
+        <div className="flex flex-col border-2 w-[40%] h-[35rem]">
           <ExcelInputOld />
           <OldTable />
         </div>
-        <div className="flex flex-col border-2 w-[40%]">
+        <div className="flex flex-col border-2 w-[40%] h-[35rem]">
           <ExcelInputNew />
           <NewTable />
         </div>

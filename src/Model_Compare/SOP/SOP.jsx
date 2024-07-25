@@ -5,12 +5,13 @@ import StepTwo from "../SOP/Step2_2.png";
 import StepThree from "../SOP/Step3_3.png";
 import StepFour from "../SOP/Step4_4.png";
 import Step5_5 from "../SOP/Step5_5.png";
-import { CurrentStepStore } from "../../../Store/Store";
-import { FileNameStore } from "../../../Store/Store";
+import { ModelCompareStore } from "../../../Store/Store";
+// import { CurrentStepStore } from "../../../Store/Store";
+// import { FileNameStore } from "../../../Store/Store";
 
 export default function SOP() {
-  const Step = CurrentStepStore((state) => state.data.CurrentStep);
-  const fileName = FileNameStore((state) => state.data.FileName);
+  const Step = ModelCompareStore((state) => state.data.CurrentStep);
+  const fileName = ModelCompareStore((state) => state.data.FileName);
   const SOPData = [
     {
       Step: 1,

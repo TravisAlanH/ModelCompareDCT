@@ -1,12 +1,12 @@
 import React from "react";
-import { SortedStore } from "../../../../Store/Store";
-import { FaSortAmountDown, FaSortAmountDownAlt, FaUndo } from "react-icons/fa";
+// import { SortedStore } from "../../../../Store/Store";
+import { ModelCompareStore } from "../../../../Store/Store";
 
 export default function SortFinishedTable() {
-  const SortedBy = SortedStore((state) => state.data.sortedby);
-  const SortedOrder = SortedStore((state) => state.data.sortedOrder);
-  const setSorted = SortedStore((state) => state.setSorted);
-  const removeSorted = SortedStore((state) => state.removeSorted);
+  const SortedBy = ModelCompareStore((state) => state.data.sortedby);
+  const SortedOrder = ModelCompareStore((state) => state.data.sortedOrder);
+  const setSorted = ModelCompareStore((state) => state.setSorted);
+  const removeSorted = ModelCompareStore((state) => state.removeSorted);
   const [SortName, setSortName] = React.useState(`Sort Table`);
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 

@@ -1,0 +1,75 @@
+.spinner-image {
+  transform: translateY(-2rem);
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.Bird1,
+.Bird2,
+.Bird3,
+.Bird4,
+.Bird5,
+.Bird6,
+.Bird7,
+.Bird8,
+.Bird9,
+.Bird10,
+.Bird11 {
+  animation: fadeInOut 3s infinite;
+}
+
+.Bird1 {
+  animation-duration: 1.5s;
+}
+
+.Bird2 {
+  animation-duration: 2s;
+}
+
+.Bird3 {
+  animation-duration: 3s;
+}
+
+.Bird4 {
+  animation-duration: 2.5s;
+}
+
+.Bird5 {
+  animation-duration: 1.7s;
+}
+
+.Bird6 {
+  animation-duration: 2.2s;
+}
+
+.Bird7 {
+  animation-duration: 1.5s;
+}
+
+.Bird8 {
+  animation-duration: 2.7s;
+}
+
+.Bird9 {
+  animation-duration: 2s;
+}
+
+.Bird10 {
+  animation-duration: 1.9s;
+}
+
+.Bird11 {
+  animation-duration: 2.5s;
+}

@@ -1,22 +1,23 @@
 import React from "react";
 import "./Modal.css";
-import { originDataStore } from "../../../../Store/Store";
-import { CompareColumnStore } from "../../../../Store/Store";
+// import { originDataStore } from "../../../../Store/Store";
+// import { CompareColumnStore } from "../../../../Store/Store";
+// import { FileNameStore } from "../../../../Store/Store";
+// import { SortedStore } from "../../../../Store/Store";
+import { ModelCompareStore } from "../../../../Store/Store";
 import { ModelMake } from "../../../Functions/LenenshteinDistance/MLT";
-import { FileNameStore } from "../../../../Store/Store";
+import SortFinishedTable from "../Sort/SortFinishedTable";
 import LoadingSpinner from "../LoadingSpinner/Spinner";
 import findTopMatches from "../../../Functions/LenenshteinDistance/LenenshteinDistance";
-import SortFinishedTable from "../Sort/SortFinishedTable";
-import { SortedStore } from "../../../../Store/Store";
 
 export default function Modal() {
-  const data = originDataStore((state) => state.data.originData);
-  const fileName = FileNameStore((state) => state.data.FileName);
-  const compareColumn = CompareColumnStore((state) => state.data.CompareColumn);
+  const data = ModelCompareStore((state) => state.data.originData);
+  const fileName = ModelCompareStore((state) => state.data.FileName);
+  const compareColumn = ModelCompareStore((state) => state.data.CompareColumn);
   const [loading, setLoading] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(null);
-  const SortedBy = SortedStore((state) => state.data.sortedby);
-  const SortedOrder = SortedStore((state) => state.data.sortedOrder);
+  const SortedBy = ModelCompareStore((state) => state.data.sortedby);
+  const SortedOrder = ModelCompareStore((state) => state.data.sortedOrder);
   const [reload, setReload] = React.useState(false);
 
   React.useEffect(() => {

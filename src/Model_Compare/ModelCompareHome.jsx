@@ -1,5 +1,6 @@
 import React from "react";
-import { CompareColumnStore, CurrentStepStore, FileNameStore } from "../../Store/Store";
+// import { CompareColumnStore, CurrentStepStore, FileNameStore } from "../../Store/Store";
+import { ModelCompareStore } from "../../Store/Store";
 import Header from "./Comp/Header/Header";
 import SOPButton from "./Comp/Buttons/SOPButton";
 import ExcelInputOrigin from "./Comp/Inputs/ExcelInputOrigin";
@@ -10,9 +11,9 @@ import SOPModal from "./Comp/Modal/SOPModal";
 import Footer from "./Comp/Footer/Footer";
 
 export default function ModelCompareHome({ setViewPage }) {
-  const setCurrentStep = CurrentStepStore((state) => state.setCurrentStep);
-  const fileName = FileNameStore((state) => state.data.FileName);
-  const SelectedColumn = CompareColumnStore((state) => state.data.CompareColumn);
+  const setCurrentStep = ModelCompareStore((state) => state.setCurrentStep);
+  const fileName = ModelCompareStore((state) => state.data.FileName);
+  const SelectedColumn = ModelCompareStore((state) => state.data.CompareColumn);
 
   return (
     <>

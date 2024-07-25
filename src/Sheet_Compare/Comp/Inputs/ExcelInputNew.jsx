@@ -4,18 +4,19 @@ import * as XLSX from "xlsx";
 // import { FileNameStore } from "../../../../Store/Store";
 // import { CompareColumnStore } from "../../../../Store/Store";
 // import { CurrentStepStore } from "../../../../Store/Store";
-import { ModelCompareStore } from "../../../../Store/Store";
+import { SheetCompareStore } from "../../../../Store/Store";
 import LoadingSpinner from "../LoadingSpinner/Spinner";
 
-export default function ExcelInputOrigin() {
-  const setOriginData = ModelCompareStore((state) => state.setOriginData);
-  const removeOriginData = ModelCompareStore((state) => state.removeOriginData);
-  const setFileName = ModelCompareStore((state) => state.setFileName);
-  const fileName = ModelCompareStore((state) => state.data.FileName);
-  const removeFileName = ModelCompareStore((state) => state.removeFileName);
+export default function ExcelInputNew() {
+  const setNewData = SheetCompareStore((state) => state.setNewData);
+  const removeNewData = SheetCompareStore((state) => state.removeNewData);
+  const setNewFileName = SheetCompareStore((state) => state.setNewFileName);
+  const fileNameNew = SheetCompareStore((state) => state.data.newFileName);
+  const removeNewFileName = SheetCompareStore((state) => state.removeNewFileName);
   const [loading, setLoading] = React.useState(false);
-  const removeCompareColumn = ModelCompareStore((state) => state.resetCompareColumn);
-  const setCurrentStep = ModelCompareStore((state) => state.setCurrentStep);
+  const removeNewCompareColumn = SheetCompareStore((state) => state.removeNewColumnCompare);
+  const setShowColumns = SheetCompareStore((state) => state.setNewVisableTableShow);
+  // const setCurrentStep = SheetCompareStore((state) => state.setCurrentStep);
 
   //const originData = originDataStore((state) => state.data.originData);
 
@@ -23,7 +24,7 @@ export default function ExcelInputOrigin() {
     const file = e.target.files[0];
 
     if (file) {
-      setFileName(file.name);
+      setNewFileName(file.name);
       const reader = new FileReader();
 
       reader.onload = (event) => {
@@ -31,7 +32,6 @@ export default function ExcelInputOrigin() {
         const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: "array" });
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
-        const sheetData = XLSX.utils.sheet_to_json(worksheet);
         console.log(worksheet);
         let FormattedData = {};
         Object.keys(worksheet)
@@ -40,7 +40,7 @@ export default function ExcelInputOrigin() {
             FormattedData[key] = worksheet[key].v;
           });
         console.log(FormattedData);
-        setOriginData(FormattedData);
+        setNewData(FormattedData);
       };
 
       reader.readAsArrayBuffer(file);
@@ -50,35 +50,36 @@ export default function ExcelInputOrigin() {
 
   return (
     <div className="flex flex-row gap-5 h-[3rem]">
-      {fileName != "" ? (
+      {fileNameNew != "" ? (
         <div>
           <button
             className="border-2 border-black rounded-md h-[3rem] px-3 flex flex-row items-center"
             onClick={() => {
-              setCurrentStep(1);
-              removeOriginData();
-              removeFileName();
-              removeCompareColumn();
+              // setCurrentStep(1);
+              removeNewData();
+              removeNewFileName();
+              removeNewCompareColumn();
+              setShowColumns(0);
               document.getElementById("OriginInput").value = "";
             }}
           >
-            Clear File
+            Clear New File
           </button>
         </div>
       ) : null}
       <div>
         <button
           onClick={() => {
-            setCurrentStep(2);
-            document.getElementById("OriginInput").click();
+            // setCurrentStep(2);
+            document.getElementById("OriginInputNew").click();
           }}
-          disabled={fileName != "" ? true : false}
-          className={` px-3 flex flex-row items-center rounded-md font-bold h-full ${fileName == "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
+          disabled={fileNameNew != "" ? true : false}
+          className={` px-3 flex flex-row items-center rounded-md font-bold h-full ${fileNameNew == "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
         >
-          Open File
+          Open New File
         </button>
         <input
-          id="OriginInput"
+          id="OriginInputNew"
           type="file"
           accept=".xlsx"
           className="hidden"

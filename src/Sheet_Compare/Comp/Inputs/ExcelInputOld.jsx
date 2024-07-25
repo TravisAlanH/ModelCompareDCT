@@ -4,18 +4,19 @@ import * as XLSX from "xlsx";
 // import { FileNameStore } from "../../../../Store/Store";
 // import { CompareColumnStore } from "../../../../Store/Store";
 // import { CurrentStepStore } from "../../../../Store/Store";
-import { ModelCompareStore } from "../../../../Store/Store";
+import { SheetCompareStore } from "../../../../Store/Store";
 import LoadingSpinner from "../LoadingSpinner/Spinner";
 
-export default function ExcelInputOrigin() {
-  const setOriginData = ModelCompareStore((state) => state.setOriginData);
-  const removeOriginData = ModelCompareStore((state) => state.removeOriginData);
-  const setFileName = ModelCompareStore((state) => state.setFileName);
-  const fileName = ModelCompareStore((state) => state.data.FileName);
-  const removeFileName = ModelCompareStore((state) => state.removeFileName);
+export default function ExcelInputOld() {
+  const setOriginData = SheetCompareStore((state) => state.setOldData);
+  const removeOriginData = SheetCompareStore((state) => state.removeOldData);
+  const setFileName = SheetCompareStore((state) => state.setOldFileName);
+  const fileName = SheetCompareStore((state) => state.data.oldFileName);
+  const removeFileName = SheetCompareStore((state) => state.removeOldFileName);
   const [loading, setLoading] = React.useState(false);
-  const removeCompareColumn = ModelCompareStore((state) => state.resetCompareColumn);
-  const setCurrentStep = ModelCompareStore((state) => state.setCurrentStep);
+  const removeCompareColumn = SheetCompareStore((state) => state.removeOldColumnCompare);
+  const setShowColumns = SheetCompareStore((state) => state.setOldVisableTableShow);
+  // const setCurrentStep = SheetCompareStore((state) => state.setCurrentStep);
 
   //const originData = originDataStore((state) => state.data.originData);
 
@@ -55,27 +56,28 @@ export default function ExcelInputOrigin() {
           <button
             className="border-2 border-black rounded-md h-[3rem] px-3 flex flex-row items-center"
             onClick={() => {
-              setCurrentStep(1);
+              // setCurrentStep(1);
               removeOriginData();
               removeFileName();
               removeCompareColumn();
               document.getElementById("OriginInput").value = "";
+              setShowColumns(0);
             }}
           >
-            Clear File
+            Clear Old File
           </button>
         </div>
       ) : null}
       <div>
         <button
           onClick={() => {
-            setCurrentStep(2);
+            // setCurrentStep(2);
             document.getElementById("OriginInput").click();
           }}
           disabled={fileName != "" ? true : false}
           className={` px-3 flex flex-row items-center rounded-md font-bold h-full ${fileName == "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
         >
-          Open File
+          Open Old File
         </button>
         <input
           id="OriginInput"

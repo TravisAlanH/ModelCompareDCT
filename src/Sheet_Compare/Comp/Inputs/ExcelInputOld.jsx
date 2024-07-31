@@ -94,7 +94,7 @@ export default function ExcelInputOld() {
           />
         </div>
       </div>
-      <div className="flex flex-col justify-center pr-5">{fileName != "" ? <p className="text-md font-bold">{fileName}</p> : null}</div>
+      <div className="pl-5 flex flex-col justify-center pr-5">{fileName != "" ? <p className="text-md font-bold">{fileName}</p> : null}</div>
       {loading ? <LoadingSpinner /> : null}
     </div>
   );

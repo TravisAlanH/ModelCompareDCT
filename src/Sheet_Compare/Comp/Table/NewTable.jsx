@@ -53,7 +53,7 @@ export default function NewTable() {
     <div className="w-full overflow-auto flex flex-col" ref={scrollableDivRef}>
       <div className="py-2">{columns.length > 0 ? <NewTableNav columns={columns} /> : null}</div>
 
-      <table className="border-2 mb-10 h-[70rem]">
+      <table className="border-2 mb-10 ">
         <thead className="border-2">
           <tr className="border-2">
             {columns.slice(showColumns, showColumns + 6).map((col) => (
@@ -76,7 +76,7 @@ export default function NewTable() {
         </thead>
         <tbody>
           {rows.slice(0, counter * 2 + 50).map((row) => (
-            <tr key={row} className="h-[1rem]">
+            <tr key={row} className="h-[1.5rem]">
               {columns.slice(showColumns, showColumns + 6).map((col) => (
                 <td key={col + row} className={`border-2 text-nowrap px-2 ${compareColumn === col.toString() ? "bg-gray-300" : ""}`}>
                   {String(data[col + row]).length > 20 ? String(data[col + row]).substring(0, 20) + "..." : data[col + row]}

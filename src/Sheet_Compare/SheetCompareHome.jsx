@@ -41,7 +41,12 @@ export default function SheetCompareHome({ setViewPage }) {
           >
             Select Truth Colums
           </button>
-          <button className={` px-3 flex flex-row items-center rounded-md font-bold h-[3rem] ${!isColumnEmpty ? "bg-orange-400 text-white" : "bg-gray-200"}`}>
+          <button
+            onClick={() => {
+              document.getElementById("ProcessModal").style.display = "block";
+            }}
+            className={` px-3 flex flex-row items-center rounded-md font-bold h-[3rem] ${!isColumnEmpty ? "bg-orange-400 text-white" : "bg-gray-200"}`}
+          >
             Open Process
           </button>
         </div>

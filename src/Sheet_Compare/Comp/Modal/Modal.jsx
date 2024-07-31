@@ -119,7 +119,7 @@ export default function Modal() {
                   const url = URL.createObjectURL(blob);
                   const a = document.createElement("a");
                   a.setAttribute("href", url);
-                  a.setAttribute("download", `Model_${fileName.length > 18 ? fileName.substring(0, 18) : fileName}.csv`);
+                  a.setAttribute("download", `Compare_${fileName.length > 18 ? fileName.substring(0, 18) : fileName}.csv`);
                   a.click();
                 }}
               >

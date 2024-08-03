@@ -19,7 +19,7 @@ export default function ModelCompareHome({ setViewPage }) {
     <>
       <Header setViewPage={setViewPage} />
       {fileName != "" ? <SOPButton /> : null}
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full items-center">
         <div className="flex flex-row justify-center gap-5 py-2">
           <ExcelInputOrigin />
           <div className="flex flex-row gap-5 justify-center">
@@ -44,7 +44,7 @@ export default function ModelCompareHome({ setViewPage }) {
             </div>
           </div>
         </div>
-        <div className="px-5 flex flex-row justify-center">
+        <div className="px-5 flex flex-row justify-center w-[80%] h-[40-rem] border-2">
           <Table />
         </div>
         {fileName == "" ? (

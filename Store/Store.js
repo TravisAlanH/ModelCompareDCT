@@ -10,6 +10,7 @@ let initState = {
     CurrentStep: 0,
     sortedby: "",
     sortedOrder: 0,
+    visableTableShow: 0,
   },
   SheetCompareState: {
     oldData: {},
@@ -186,6 +187,11 @@ export const ModelCompareStore = create(
     removeNewData: () => {
       set((state) => ({
         data: { ...state.data, newData: {} },
+      }));
+    },
+    setVisableTableShow: (data) => {
+      set((state) => ({
+        data: { ...state.data, visableTableShow: data },
       }));
     },
   }))

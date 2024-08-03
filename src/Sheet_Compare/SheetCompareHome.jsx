@@ -21,12 +21,12 @@ export default function SheetCompareHome({ setViewPage }) {
     <div>
       <Header setViewPage={setViewPage} />
       <div className="flex flex-col items-center gap-3">
-        <div className="p-3 flex flex-col justify-center items-center">
+        {/* <div className="p-3 flex flex-col justify-center items-center">
           <p className="text-xl font-bold">{`Compare two Excel Sheets => Output: Compareison Data`}</p>
           <p className="text-xl font-bold">BUILD IN PROGRESS...</p>
           <p className="font-bold">*** Click Sunbird Logo to go Home ***</p>
-        </div>
-        <div id="Actions" className="flex flex-row gap-5">
+        </div> */}
+        <div id="Actions" className="flex flex-row gap-5 pt-5">
           <button
             className={` px-3 flex flex-row items-center rounded-md font-bold h-[3rem] ${isAnyFileNameEmpty ? "bg-orange-400 text-white" : "bg-gray-200"}`}
             disabled={true}
@@ -45,17 +45,18 @@ export default function SheetCompareHome({ setViewPage }) {
             onClick={() => {
               document.getElementById("ProcessModal").style.display = "block";
             }}
+            disabled={isAnyFileNameEmpty || isColumnEmpty}
             className={` px-3 flex flex-row items-center rounded-md font-bold h-[3rem] ${!isColumnEmpty ? "bg-orange-400 text-white" : "bg-gray-200"}`}
           >
             Open Process
           </button>
         </div>
         <div className="flex flex-row w-full justify-center gap-4">
-          <div className="flex flex-col border-2 w-[40%] h-[35rem]">
+          <div className="flex flex-col border-2 w-[40%] h-[40rem]">
             <ExcelInputOld />
             <OldTable />
           </div>
-          <div className="flex flex-col border-2 w-[40%] h-[35rem]">
+          <div className="flex flex-col border-2 w-[40%] h-[40rem]">
             <ExcelInputNew />
             <NewTable />
           </div>

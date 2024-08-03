@@ -3,13 +3,13 @@ import SOP from "../../../Model_Compare/SOP/SOP";
 
 export default function SOPModal() {
   return (
-    <div id="SOPModal" className="modal">
+    <div id="SOPModalCompare" className="modal">
       <div className="modal-content-sop flex flex-col">
         <div className="flex flex-row justify-end">
           <span
             className="close"
             onClick={() => {
-              document.getElementById("SOPModal").style.display = "none";
+              document.getElementById("SOPModalCompare").style.display = "none";
             }}
           >
             &times;

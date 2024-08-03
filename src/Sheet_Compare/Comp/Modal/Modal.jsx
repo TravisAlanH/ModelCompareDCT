@@ -28,16 +28,12 @@ export default function Modal() {
 
   function hasConsecutiveEqualValues(obj) {
     const keys = Object.keys(obj).filter((key) => key !== "index" && key !== "Changed?");
-
-    // keys.sort((a, b) => a - b);
-
-    let ChangeFound = false;
-
+    let ChangeFound = "";
     for (let i = 0; i < keys.length - 1; i = i + 2) {
       if (obj[keys[i]] === obj[keys[i + 1]]) {
         continue;
       } else {
-        ChangeFound = true;
+        ChangeFound = "Altered";
         break;
       }
     }
@@ -51,34 +47,76 @@ export default function Modal() {
     let newDataCopy = Object.keys(JSON.parse(JSON.stringify(newData))).filter((item) => item.includes(newColumnCompare));
     let oldDataCopy = Object.keys(JSON.parse(JSON.stringify(oldData))).filter((item) => item.includes(oldColumnCompare));
 
-    oldDataCopy.forEach((key) => {
-      let found = false;
+    let MatchKey = {};
+    oldDataCopy.forEach((cell) => {
+      let foundInNews = false;
+      let valueOld = oldData[cell];
       for (let index = 0; index < newDataCopy.length; index++) {
-        let item = newDataCopy[index];
-        if (oldData[key] === newData[item]) {
-          testingOrderInNewData.push(item.replace(/[a-zA-Z]/g, ""));
+        let valueNew = newData[newDataCopy[index]];
+        if (valueOld === valueNew) {
+          MatchKey[cell] = {
+            old: cell.replace(/[a-zA-Z]/g, ""),
+            new: newDataCopy[index].replace(/[a-zA-Z]/g, ""),
+          };
           newDataCopy.splice(index, 1);
-          found = true;
+          foundInNews = true;
           break;
         }
       }
-      if (!found) {
-        inOldNotNew.push(key);
+      if (!foundInNews) {
+        inOldNotNew.push(cell);
       }
     });
+    console.log("MatchKey", MatchKey);
+
     inNewNotOld = newDataCopy;
 
+    console.log(testingOrderInNewData, inOldNotNew, inNewNotOld);
+
     let combinedTableData = [];
-    rowsOldData.forEach((row, rowIndex) => {
+
+    const filteredRowsOldData = rowsOldData.filter((row) => {
+      return !inOldNotNew.some((item) => parseInt(item.replace(/[a-zA-Z]/g, "")) == row);
+    });
+    console.log("filteredRowsOldData", filteredRowsOldData);
+    filteredRowsOldData.forEach((row, rowIndex) => {
       const fillObject = {};
-      columnsOldData.forEach((col, colIndex) => {
-        fillObject[`${oldData[`${col}1`]}`] = oldData[`${col}${rowIndex + 1}`];
-        fillObject[`${newData[`${col}1`]} (new)`] = newData[`${col}${testingOrderInNewData[rowIndex]}`];
+      columnsOldData.forEach((col) => {
+        fillObject[`${oldData[`${col}1`]}`] = oldData[`${col}${row}`];
+        fillObject[`${newData[`${col}1`]} (new)`] = newData[`${col}${MatchKey[`${oldColumnCompare}${row}`].new}`];
       });
       fillObject["index"] = rowIndex;
       fillObject["Changed?"] = hasConsecutiveEqualValues(fillObject);
       combinedTableData.push(fillObject);
     });
+    console.log("combineData", combinedTableData);
+    console.log("inOldNotNew", inOldNotNew);
+    if (inOldNotNew.length > 0) {
+      inOldNotNew.forEach((key, index) => {
+        const fillObject = {};
+        columnsOldData.forEach((col) => {
+          fillObject[`${oldData[`${col}1`]}`] = oldData[`${col}${key.replace(/[a-zA-Z]/g, "")}`];
+          fillObject[`${newData[`${col}1`]} (new)`] = "";
+        });
+        fillObject["index"] = rowsOldData.length + index;
+        fillObject["Changed?"] = "Removed";
+        combinedTableData.push(fillObject);
+      });
+    }
+    console.log("inNewNotNew", inNewNotOld);
+    if (inNewNotOld.length > 0) {
+      inNewNotOld.forEach((key, index) => {
+        const fillObject = {};
+        columnsNewData.forEach((col) => {
+          fillObject[`${oldData[`${col}1`]}`] = "";
+          fillObject[`${newData[`${col}1`]} (new)`] = newData[`${col}${key.replace(/[a-zA-Z]/g, "")}`];
+        });
+        fillObject["index"] = rowsOldData.length + inOldNotNew.length + index;
+        fillObject["Changed?"] = "Added";
+        combinedTableData.push(fillObject);
+      });
+    }
+
     return combinedTableData;
   };
 
@@ -194,10 +232,10 @@ export default function Modal() {
                             className={`border-2 text-nowrap px-2 h-[1.5rem] ${selectedRow === rowIndex ? "bg-slate-300" : ""}`}
                             onClick={() => handleSelectedRow(rowIndex)}
                           >
-                            {row["Changed?"] ? "Altered" : ""}
+                            {row["Changed?"] ? row["Changed?"] : ""}
                           </td>
                           {Object.keys(row).map((key, cellIndex) => {
-                            if (key === "index") return null;
+                            if (key === "index" || key === "Changed?") return null;
                             return (
                               <td
                                 id="CheckCell"

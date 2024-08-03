@@ -6,7 +6,7 @@ export default function SOPButton() {
       <button
         className="bg-orange-400 text-white font-bold rounded-full h-[2.5rem] w-[2.5rem] text-xl"
         onClick={() => {
-          document.getElementById("SOPModal").style.display = "block";
+          document.getElementById("SOPModalCompare").style.display = "block";
         }}
       >
         ?

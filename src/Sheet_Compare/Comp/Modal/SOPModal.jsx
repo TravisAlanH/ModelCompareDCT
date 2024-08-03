@@ -1,15 +1,15 @@
 import React from "react";
-import SOP from "../../../Model_Compare/SOP/SOP";
+import SOP from "../SOP/SOP";
 
 export default function SOPModal() {
   return (
-    <div id="SOPModal" className="modal">
+    <div id="SOPSheetCompare" className="modal">
       <div className="modal-content-sop flex flex-col">
         <div className="flex flex-row justify-end">
           <span
             className="close"
             onClick={() => {
-              document.getElementById("SOPModal").style.display = "none";
+              document.getElementById("SOPSheetCompare").style.display = "none";
             }}
           >
             &times;

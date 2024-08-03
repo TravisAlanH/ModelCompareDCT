@@ -7,11 +7,15 @@ import ExcelInputNew from "./Comp/Inputs/ExcelInputNew";
 import NewTable from "./Comp/Table/NewTable";
 import { SheetCompareStore } from "../../Store/Store";
 import Modal from "./Comp/Modal/Modal";
+import SOP from "./Comp/SOP/SOP";
+import SOPButton from "./Comp/Buttons/SOPButton";
+import SOPModal from "./Comp/Modal/SOPModal";
 
 export default function SheetCompareHome({ setViewPage }) {
   // Destructure the state from SheetCompareStore to ensure consistent Hook usage
   const { data } = SheetCompareStore((state) => state);
-  const { oldFileName, newFileName, oldColumnCompare, newColumnCompare } = data;
+  const { oldFileName, newFileName, oldColumnCompare, newColumnCompare, Begin } = data;
+  const { setBegin } = SheetCompareStore((state) => state);
 
   // Check conditions based on the destructured state
   const isAnyFileNameEmpty = !oldFileName || !newFileName;
@@ -20,6 +24,7 @@ export default function SheetCompareHome({ setViewPage }) {
   return (
     <div>
       <Header setViewPage={setViewPage} />
+      {Begin ? <SOPButton /> : null}
       <div className="flex flex-col items-center gap-3">
         {/* <div className="p-3 flex flex-col justify-center items-center">
           <p className="text-xl font-bold">{`Compare two Excel Sheets => Output: Compareison Data`}</p>
@@ -29,9 +34,10 @@ export default function SheetCompareHome({ setViewPage }) {
         <div id="Actions" className="flex flex-row gap-5 pt-5">
           <button
             className={` px-3 flex flex-row items-center rounded-md font-bold h-[3rem] ${isAnyFileNameEmpty ? "bg-orange-400 text-white" : "bg-gray-200"}`}
-            disabled={true}
+            disabled={Begin}
+            onClick={() => setBegin(true)}
           >
-            Open Files Below
+            {!Begin ? "Sheet Compare" : "Open Files Below"}
           </button>
           <button
             disabled={true}
@@ -51,18 +57,27 @@ export default function SheetCompareHome({ setViewPage }) {
             Open Process
           </button>
         </div>
-        <div className="flex flex-row w-full justify-center gap-4">
-          <div className="flex flex-col border-2 w-[40%] h-[40rem]">
-            <ExcelInputOld />
-            <OldTable />
+        {Begin ? (
+          <div className="flex flex-row w-full justify-center gap-4">
+            <div className="flex flex-col border-2 w-[40%] h-[40rem]">
+              <div className="p-2">
+                <ExcelInputOld />
+              </div>
+              <OldTable />
+            </div>
+            <div className="flex flex-col border-2 w-[40%] h-[40rem]">
+              <div className="p-2">
+                <ExcelInputNew />
+              </div>
+              <NewTable />
+            </div>
           </div>
-          <div className="flex flex-col border-2 w-[40%] h-[40rem]">
-            <ExcelInputNew />
-            <NewTable />
-          </div>
-        </div>
+        ) : (
+          <SOP />
+        )}
       </div>
       {isAnyFileNameEmpty ? null : <Modal />}
+      <SOPModal />
       <Footer />
     </div>
   );

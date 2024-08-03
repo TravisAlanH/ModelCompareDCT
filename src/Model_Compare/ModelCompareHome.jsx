@@ -44,9 +44,11 @@ export default function ModelCompareHome({ setViewPage }) {
             </div>
           </div>
         </div>
-        <div className="px-5 flex flex-row justify-center w-[80%] h-[40-rem] border-2">
-          <Table />
-        </div>
+        {fileName != "" ? (
+          <div className="px-5 flex flex-row justify-center w-[80%] h-[40-rem] border-2">
+            <Table />
+          </div>
+        ) : null}
         {fileName == "" ? (
           <div className="flex flex-row justify-center pt-5">
             <SOP />

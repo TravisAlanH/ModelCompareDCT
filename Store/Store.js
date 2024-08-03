@@ -19,6 +19,7 @@ let initState = {
     newColumnCompare: "",
     oldFileName: "",
     newFileName: "",
+    Begin: false,
     CurrentStep: 0,
     sortedby: "",
     sortedOrder: 0,
@@ -30,6 +31,11 @@ let initState = {
 export const SheetCompareStore = create(
   devtools((set) => ({
     data: initState.SheetCompareState,
+    setBegin: (data) => {
+      set((state) => ({
+        data: { ...state.data, Begin: data },
+      }));
+    },
     setOldData: (data) => {
       set((state) => ({
         data: { ...state.data, oldData: data },

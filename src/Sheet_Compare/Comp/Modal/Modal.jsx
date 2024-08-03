@@ -71,19 +71,16 @@ export default function Modal() {
 
     inNewNotOld = newDataCopy;
 
-    console.log(testingOrderInNewData, inOldNotNew, inNewNotOld);
-
     let combinedTableData = [];
 
     const filteredRowsOldData = rowsOldData.filter((row) => {
       return !inOldNotNew.some((item) => parseInt(item.replace(/[a-zA-Z]/g, "")) == row);
     });
-    console.log("filteredRowsOldData", filteredRowsOldData);
     filteredRowsOldData.forEach((row, rowIndex) => {
       const fillObject = {};
       columnsOldData.forEach((col) => {
         fillObject[`${oldData[`${col}1`]}`] = oldData[`${col}${row}`];
-        fillObject[`${newData[`${col}1`]} (new)`] = newData[`${col}${MatchKey[`${oldColumnCompare}${row}`].new}`];
+        fillObject[`${newData[`${col}1`]} (new)`] = oldColumnCompare != "" ? newData[`${col}${MatchKey[`${oldColumnCompare}${row}`].new}`] : "";
       });
       fillObject["index"] = rowIndex;
       fillObject["Changed?"] = hasConsecutiveEqualValues(fillObject);

@@ -21,6 +21,11 @@ export default function HomePage({ setViewPage }) {
             Sheet Compare
           </button>
         </div>
+        <div className="px-3">
+          <button className="bg-orange-400 hover:bg-[#f18c20bd] text-white font-bold py-2 px-4 rounded" onClick={() => setViewPage(3)}>
+            Duplicate Search
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -26,7 +26,90 @@ let initState = {
     oldVisableTableShow: 0,
     newVisableTableShow: 0,
   },
+  DuplicateSearchState: {
+    originData: {},
+    CompareStartOne: "",
+    CompareStartTwo: "",
+    CompareEndOne: "",
+    CompareEndTwo: "",
+    FileName: "",
+    CurrentStep: 0,
+    sortedby: "",
+    sortedOrder: 0,
+    visableTableShow: 0,
+  },
 };
+
+export const DuplicateSearchStore = create(
+  devtools((set) => ({
+    data: initState.DuplicateSearchState,
+    setSorted: (sortedby, sortedOrder) => {
+      set((state) => ({
+        data: { ...state.data, sortedby: sortedby, sortedOrder: sortedOrder },
+      }));
+    },
+    removeSorted: () => {
+      set((state) => ({
+        data: { ...state.data, sortedby: "", sortedOrder: 0 },
+      }));
+    },
+    setCurrentStep: (Step) => {
+      set((state) => ({
+        data: { ...state.data, CurrentStep: Step },
+      }));
+    },
+    removeCurrentStep: () => {
+      set((state) => ({
+        data: { ...state.data, CurrentStep: 0 },
+      }));
+    },
+    setFileName: (data) => {
+      set((state) => ({
+        data: { ...state.data, FileName: data },
+      }));
+    },
+    removeFileName: () => {
+      set((state) => ({
+        data: { ...state.data, FileName: "" },
+      }));
+    },
+    setCompareStartOne: (data) => {
+      set((state) => ({
+        data: { ...state.data, CompareStartOne: data },
+      }));
+    },
+    setCompareStartTwo: (data) => {
+      set((state) => ({
+        data: { ...state.data, CompareStartTwo: data },
+      }));
+    },
+    setCompareEndOne: (data) => {
+      set((state) => ({
+        data: { ...state.data, CompareEndOne: data },
+      }));
+    },
+    setCompareEndTwo: (data) => {
+      set((state) => ({
+        data: { ...state.data, CompareEndTwo: data },
+      }));
+    },
+    setOriginData: (data) => {
+      set((state) => ({
+        data: { ...state.data, originData: data },
+      }));
+    },
+    removeOriginData: () => {
+      set((state) => ({
+        data: { ...state.data, originData: {} },
+      }));
+    },
+    setVisableTableShow: (data) => {
+      set((state) => ({
+        data: { ...state.data, visableTableShow: data },
+      }));
+    },
+  }))
+);
 
 export const SheetCompareStore = create(
   devtools((set) => ({

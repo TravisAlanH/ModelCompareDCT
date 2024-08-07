@@ -32,6 +32,7 @@ let initState = {
     CompareStartTwo: "",
     CompareEndOne: "",
     CompareEndTwo: "",
+    currentCompareColumns: 0,
     FileName: "",
     CurrentStep: 0,
     sortedby: "",
@@ -43,6 +44,11 @@ let initState = {
 export const DuplicateSearchStore = create(
   devtools((set) => ({
     data: initState.DuplicateSearchState,
+    setCurrentCompareColumns: (data) => {
+      set((state) => ({
+        data: { ...state.data, currentCompareColumns: data },
+      }));
+    },
     setSorted: (sortedby, sortedOrder) => {
       set((state) => ({
         data: { ...state.data, sortedby: sortedby, sortedOrder: sortedOrder },

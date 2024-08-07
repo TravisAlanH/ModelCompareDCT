@@ -2,10 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 // import { originDataStore, CompareColumnStore } from "../../../../Store/Store";
 import { DuplicateSearchStore } from "../../../../Store/Store";
 import TableNav from "../Inputs/TableNav";
+import StartSetButton from "../Buttons/StartSetButton";
+import SettingColumnsButtonMessage from "./SettingColumnsButtonMessage";
+import { FaArrowsAltH } from "react-icons/fa";
 // import { CurrentStepStore } from "../../../../Store/Store";
 
 export default function Table() {
   const data = DuplicateSearchStore((state) => state.data.originData);
+  const { CompareStartOne, CompareStartTwo, CompareEndOne, CompareEndTwo, currentCompareColumns } = DuplicateSearchStore((state) => state.data);
+  const { setCompareStartOne, setCompareStartTwo, setCompareEndOne, setCompareEndTwo, setCurrentCompareColumns } = DuplicateSearchStore((state) => state);
   // const compareColumn = DuplicateSearchStore((state) => state.data.CompareColumn);
   // const setCompareColumn = DuplicateSearchStore((state) => state.setCompareColumn);
   // const removeCompareColumn = DuplicateSearchStore((state) => state.resetCompareColumn);
@@ -16,6 +21,8 @@ export default function Table() {
   const [counter, setCounter] = useState(0);
   const lastScrollTop = useRef(0);
   const scrollableDivRef = useRef(null);
+
+  const SettingColumnsArray = [setCompareStartOne, setCompareStartTwo, setCompareEndOne, setCompareEndTwo];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +57,22 @@ export default function Table() {
 
   return (
     <div className="w-full overflow-auto flex flex-col" ref={scrollableDivRef}>
+      <div id="ColumnSetAndPreview" className="flex flex-col items-center">
+        <SettingColumnsButtonMessage />
+        <div className="flex flex-row gap-2 justify-center pt-2">
+          <div className="flex flex-row gap-2">
+            <StartSetButton Setting={0} />
+            <StartSetButton Setting={1} />
+          </div>
+          <div className="pt-3">
+            <FaArrowsAltH className="text-xl" />
+          </div>
+          <div className="flex flex-row gap-2">
+            <StartSetButton Setting={2} />
+            <StartSetButton Setting={3} />
+          </div>
+        </div>
+      </div>
       <div className="py-2">{columns.length > 0 ? <TableNav columns={columns} /> : null}</div>
       <table className="border-2 mb-10">
         <thead className="border-2">
@@ -58,13 +81,9 @@ export default function Table() {
               <th key={col} className="border-2">
                 <button
                   className="w-full h-full bg-orange-400 rounded-md"
-                  // onClick={() => {
-                  //   if (compareColumn === col) {
-                  //     // removeCompareColumn();
-                  //   } else {
-                  //     // setCompareColumn(col);
-                  //   }
-                  // }}
+                  onClick={() => {
+                    SettingColumnsArray[currentCompareColumns](col);
+                  }}
                 >
                   {col}
                 </button>
@@ -76,8 +95,21 @@ export default function Table() {
           {rows.slice(0, counter * 2 + 50).map((row, index) => (
             <tr key={row} className="h-[1.5rem]">
               {columns.slice(showColumns, showColumns + 10).map((col) => (
-                // <td key={col + row} className={`border-2 text-nowrap px-2 h-[1.5rem] ${compareColumn === col.toString() ? "bg-gray-300" : ""}`}>
-                <td key={col + row} className="border-2 text-nowrap px-2 h-[1.5rem]">
+                <td
+                  key={col + row}
+                  className={`border-2 text-nowrap px-2 h-[1.5rem] ${
+                    CompareStartOne === col.toString()
+                      ? "bg-gray-300"
+                      : CompareStartTwo === col.toString()
+                      ? "bg-gray-300"
+                      : CompareEndOne === col.toString()
+                      ? "bg-gray-400"
+                      : CompareEndTwo === col.toString()
+                      ? "bg-gray-400"
+                      : ""
+                  }`}
+                >
+                  {/* // <td key={col + row} className="border-2 text-nowrap px-2 h-[1.5rem]"> */}
                   {String(data[col + row]).length > 20 ? String(data[col + row]).substring(0, 20) + "..." : data[col + row]}
                 </td>
               ))}

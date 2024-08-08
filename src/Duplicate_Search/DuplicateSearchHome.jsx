@@ -15,6 +15,18 @@ export default function ModelCompareHome({ setViewPage }) {
   const fileName = DuplicateSearchStore((state) => state.data.FileName);
   const SelectedColumn = DuplicateSearchStore((state) => state.data.CompareColumn);
 
+  const { CompareStartOne, CompareEndOne, CompareEndTwo } = DuplicateSearchStore((state) => state.data);
+
+  const [OpenProcessTrue, setOpenProcessTrue] = React.useState(false);
+
+  React.useEffect(() => {
+    if (CompareStartOne != "") {
+      setOpenProcessTrue(false);
+    } else {
+      setOpenProcessTrue(true);
+    }
+  });
+
   return (
     <>
       <Header setViewPage={setViewPage} />
@@ -38,8 +50,8 @@ export default function ModelCompareHome({ setViewPage }) {
             </div>
             <div>
               <button
-                className={`px-3 h-[3rem] flex flex-row items-center rounded-md font-bold ${SelectedColumn != "" ? "bg-orange-400 text-white" : "bg-gray-200"}`}
-                disabled={SelectedColumn == "" ? true : false}
+                className={`px-3 h-[3rem] flex flex-row items-center rounded-md font-bold ${!OpenProcessTrue ? "bg-orange-400 text-white" : "bg-gray-200"}`}
+                disabled={OpenProcessTrue}
                 onClick={() => {
                   setCurrentStep(4);
                   document.getElementById("ProcessModal").style.display = "block";

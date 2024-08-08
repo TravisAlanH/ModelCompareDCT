@@ -66,34 +66,6 @@ export default function Modal() {
   async function ProcessData() {
     setLoading(true);
     for (let index = 0; index < tableData.length; index++) {
-      // const element = tableData[index];
-
-      // Update the table data
-      // setTableData((prev) => {
-      //   return prev.map((row) => {
-      //     if (row.Model === element.Model) {
-      //       return {
-      //         ...row,
-      //         dctModalOne: ModelMake[topMatches[0].string].Model,
-      //         dctMakeOne: ModelMake[topMatches[0].string].Make,
-      //         accuracyOne: parseFloat(topMatches[0].similarity).toFixed(2),
-      //         ObjectOne: ModelMake[topMatches[0].string].ObjectType,
-      //         dctModalTwo: ModelMake[topMatches[1].string].Model,
-      //         dctMakeTwo: ModelMake[topMatches[1].string].Make,
-      //         accuracyTwo: parseFloat(topMatches[1].similarity).toFixed(2),
-      //         ObjectTwo: ModelMake[topMatches[1].string].ObjectType,
-      //         dctModalThree: ModelMake[topMatches[2].string].Model,
-      //         dctMakeThree: ModelMake[topMatches[2].string].Make,
-      //         accuracyThree: parseFloat(topMatches[2].similarity).toFixed(2),
-      //         ObjectThree: ModelMake[topMatches[2].string].ObjectType,
-      //         OrginOrder: index,
-      //       };
-      //     }
-      //     return row;
-      //   });
-      // });
-
-      // Force a page update (React will handle re-rendering)
       await new Promise((resolve) => setTimeout(resolve, 0));
     }
 

@@ -46,7 +46,7 @@ export default function ModelCompareHome({ setViewPage }) {
                 fileName == "" ? "bg-gray-200" : SelectedColumn != "" ? "bg-gray-200" : "bg-orange-400 text-white"
               }`}
             >
-              <p>Select The Model Column Below</p>
+              <p>{`Select The Compare Column(s) Below`}</p>
             </div>
             <div>
               <button

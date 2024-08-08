@@ -12,6 +12,7 @@ import LoadingSpinner from "../LoadingSpinner/Spinner";
 
 export default function Modal() {
   const data = DuplicateSearchStore((state) => state.data.originData);
+  const { CompareStartOne, CompareStartTwo, CompareEndOne, CompareEndTwo } = DuplicateSearchStore((state) => state.data);
   const fileName = DuplicateSearchStore((state) => state.data.FileName);
   const compareColumn = DuplicateSearchStore((state) => state.data.CompareColumn);
   const [loading, setLoading] = React.useState(false);
@@ -19,10 +20,15 @@ export default function Modal() {
   const SortedBy = DuplicateSearchStore((state) => state.data.sortedby);
   const SortedOrder = DuplicateSearchStore((state) => state.data.sortedOrder);
   const [reload, setReload] = React.useState(false);
+  const [compareColumnRef, setCompareColumnRef] = React.useState([]);
 
   React.useEffect(() => {
     setReload(!reload);
   }, [SortedOrder, SortedBy]);
+
+  React.useEffect(() => {
+    setCompareColumnRef([CompareStartOne, CompareStartTwo, CompareEndOne, CompareEndTwo]);
+  }, [CompareStartOne, CompareStartTwo, CompareEndOne, CompareEndTwo]);
 
   const columns = Array.from(new Set(Object.keys(data).map((key) => key.match(/[A-Z]+/)[0])));
   const rows = Array.from(new Set(Object.keys(data).map((key) => key.match(/\d+/)[0])));
@@ -40,16 +46,18 @@ export default function Modal() {
 
   const [tableData, setTableData] = React.useState([]);
 
-  console.log("TableData", tableData);
-
   React.useEffect(() => {
     setTableData(() => {
       let returnArray = [];
       for (let index = 0; index < rows.length; index++) {
         // for (let index = 1; index < rows.length; index++) {
-        let initObject = {};
+        let initObject = { Duplicate: "" };
+        if (index === 0) {
+          initObject.Duplicate = "Duplicate?";
+        }
         columns.map((col) => {
-          initObject[data[`${col}1`]] = data[`${col}${rows[index]}`];
+          // initObject[data[`${col}1`]] = data[`${col}${rows[index]}`];
+          initObject[col] = data[`${col}${rows[index]}`];
         });
         returnArray.push(initObject);
       }
@@ -63,11 +71,88 @@ export default function Modal() {
 
   console.log("Table", tableData);
 
+  function CheckforDup(ORValue, ORRow, COPColumn) {
+    for (let i = 0; i < tableData.length; i++) {
+      if (ORRow === i) continue;
+      if (tableData[i].Duplicate === "Yes") continue;
+      if (tableData[i][COPColumn] === ORValue) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   async function ProcessData() {
     setLoading(true);
+    // set all tabledata items to Duplicate: ""
+    setTableData((prev) => {
+      let newTableData = [...prev];
+      newTableData.map((row, index) => {
+        if (index === 0) return row;
+        row.Duplicate = "";
+      });
+      return newTableData;
+    });
+
+    console.log(tableData);
     for (let index = 0; index < tableData.length; index++) {
-      await new Promise((resolve) => setTimeout(resolve, 0));
+      if (index === 0) {
+        continue;
+      }
+      setTableData((prev) => {
+        let newTableData = [...prev];
+        // let Duplicate = false;
+        if (CompareEndOne === "" && CompareEndTwo === "" && CompareStartTwo === "") {
+          // only start one with value
+          // SOLO Column
+          let DuplicateIndex = -1;
+          if (tableData[index].Duplicate === "Yes") return newTableData;
+          for (let i = 0; i < tableData.length; i++) {
+            if (index === i) continue;
+            if (tableData[i][compareColumnRef[0]] === tableData[index][compareColumnRef[0]]) {
+              DuplicateIndex = i;
+            }
+          }
+          if (DuplicateIndex !== -1) {
+            newTableData[DuplicateIndex].Duplicate = "Yes";
+          }
+        } else if (CompareEndOne !== "" && CompareEndTwo === "" && CompareStartTwo === "") {
+          // start one and end one with value
+          // TWO Column
+          let DuplicateIndex = -1;
+          if (tableData[index].Duplicate === "Yes") return newTableData;
+          for (let i = 0; i < tableData.length; i++) {
+            if (index === i) continue;
+            if (tableData[i][compareColumnRef[0]] === tableData[index][compareColumnRef[2]]) {
+              DuplicateIndex = index;
+            }
+          }
+          if (DuplicateIndex !== -1) {
+            newTableData[DuplicateIndex].Duplicate = "Yes";
+          }
+        } else if (CompareEndOne !== "" && CompareEndTwo !== "" && CompareStartTwo !== "") {
+          // start one, end one, start two, end two with value
+          // FOUR Column
+          let DuplicateIndex = -1;
+          if (tableData[index].Duplicate === "Yes") return newTableData;
+          for (let i = 0; i < tableData.length; i++) {
+            if (index === i) continue;
+            if (
+              tableData[i][compareColumnRef[0]] + tableData[i][compareColumnRef[1]] ===
+              tableData[index][compareColumnRef[2]] + tableData[index][compareColumnRef[3]]
+            ) {
+              DuplicateIndex = index;
+            }
+          }
+          if (DuplicateIndex !== -1) {
+            newTableData[DuplicateIndex].Duplicate = "Yes";
+          }
+        }
+        // newTableData[index].Duplicate = "";
+        return newTableData;
+      });
     }
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     setLoading(false);
   }

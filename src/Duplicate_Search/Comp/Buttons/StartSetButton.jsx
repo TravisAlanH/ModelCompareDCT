@@ -14,9 +14,9 @@ export default function StartSetButton({ Setting }) {
   }, [CompareStartOne, CompareStartTwo, CompareEndOne, CompareEndTwo]);
 
   return (
-    <div>
+    <div className={`${Setting === currentCompareColumns ? "outline outline-4 outline-orange-400 outline-offset-2 rounded-sm mb-2" : ""}`}>
       <button
-        className="bg-orange-400 text-white font-bold py-2 px-4 rounded w-full"
+        className={`bg-orange-400 text-white font-bold py-1 px-4 rounded w-full`}
         disabled={Setting == 1 ? (ShownCompare[0] == "" ? true : false) : Setting == 3 ? (ShownCompare[2] == "" ? true : false) : false}
         onClick={() => {
           setCurrentCompareColumns(Setting);
@@ -27,25 +27,18 @@ export default function StartSetButton({ Setting }) {
           : `Second (${Setting == 1 ? ShownCompare[1] : ShownCompare[3]})`}
       </button>
       <div id="previewStart" className="flex flex-row justify-center">
-        <input
-          type="text"
-          className="w-[8rem] px-1"
-          disabled={true}
-          value={
-            ShownCompare[Setting] != ""
-              ? originData[`${ShownCompare[Setting]}1`].length > 10
-                ? originData[`${ShownCompare[Setting]}1`].splice(0, 10) + "..."
-                : originData[`${ShownCompare[Setting]}1`]
-              : ""
-          }
-        />
+        <input type="text" className="w-[8rem] px-1" disabled={true} value={ShownCompare[Setting] != "" ? originData[`${ShownCompare[Setting]}1`] : ""} />
         <div className="w-[2rem]">
           {ShownCompare[Setting] != "" ? (
             <button
               className="flex flex-row justify-center h-full items-center bg-red-400 w-[2rem] rounded-sm text-white font-bold"
               onClick={() => {
                 setCompareColumns[Setting]("");
-                setCurrentCompareColumns(Setting);
+                if (Setting == 3 || Setting == 1) {
+                  setCurrentCompareColumns(Setting - 1);
+                } else {
+                  setCurrentCompareColumns(Setting);
+                }
                 setReload(!reload);
               }}
             >

@@ -77,7 +77,7 @@ export default function SortFinishedTable() {
       {isDropdownOpen && (
         <ul className="absolute left-0 top-full mt-2 w-[10rem] bg-white border border-gray-300 rounded-md shadow-lg z-10">
           {/* Dropdown Items */}
-          {["#Duplicate"].map((item) => (
+          {["Duplicate"].map((item) => (
             <li
               key={item}
               onClick={() => handleOptionClick(item)} // Handles option click

@@ -22,6 +22,8 @@ export default function Modal() {
   const [reload, setReload] = React.useState(false);
   const [compareColumnRef, setCompareColumnRef] = React.useState([]);
 
+  console.log("SelectedRow", selectedRow);
+
   console.log();
 
   React.useEffect(() => {
@@ -55,7 +57,7 @@ export default function Modal() {
         // for (let index = 1; index < rows.length; index++) {
         let initObject = { Duplicate: "" };
         if (index === 0) {
-          initObject.Duplicate = "#Duplicate?";
+          initObject.Duplicate = "Duplicate?";
         }
         columns.map((col) => {
           // initObject[data[`${col}1`]] = data[`${col}${rows[index]}`];
@@ -211,11 +213,7 @@ export default function Modal() {
                 {tableData.length > 0
                   ? Object.keys(tableData[0]).map((key, index) => {
                       return (
-                        <td
-                          key={index}
-                          id="Header rows"
-                          className={`border-2 px-1 w-auto text-nowrap bg-white sticky left-0 ${selectedRow === index ? "bg-gray-300" : ""}`}
-                        >
+                        <td key={index} id="Header rows" className={`border-2 px-1 w-auto text-nowrap bg-white ${selectedRow === index ? "bg-gray-300" : ""}`}>
                           {tableData[0][key]}
                         </td>
                       );
@@ -268,7 +266,7 @@ export default function Modal() {
                             <td
                               key={index}
                               id="data rows"
-                              className={`border-2 px-1 w-auto text-nowrap bg-white ${selectedRow === index ? "bg-gray-300" : ""}`}
+                              className={`border-2 px-1 w-auto text-nowrap bg-white ${selectedRow === index + 1 ? "bg-gray-300" : ""}`}
                             >
                               {row[key]}
                             </td>

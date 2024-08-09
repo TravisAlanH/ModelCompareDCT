@@ -22,6 +22,8 @@ export default function Modal() {
   const [reload, setReload] = React.useState(false);
   const [compareColumnRef, setCompareColumnRef] = React.useState([]);
 
+  console.log();
+
   React.useEffect(() => {
     setReload(!reload);
   }, [SortedOrder, SortedBy]);
@@ -53,12 +55,13 @@ export default function Modal() {
         // for (let index = 1; index < rows.length; index++) {
         let initObject = { Duplicate: "" };
         if (index === 0) {
-          initObject.Duplicate = "Duplicate?";
+          initObject.Duplicate = "#Duplicate?";
         }
         columns.map((col) => {
           // initObject[data[`${col}1`]] = data[`${col}${rows[index]}`];
           initObject[col] = data[`${col}${rows[index]}`];
         });
+        initObject.OrginOrder = index;
         returnArray.push(initObject);
       }
       console.log(returnArray);
@@ -68,19 +71,6 @@ export default function Modal() {
   // }, [data, compareColumn]);
 
   // console.log("tableData", tableData);
-
-  console.log("Table", tableData);
-
-  function CheckforDup(ORValue, ORRow, COPColumn) {
-    for (let i = 0; i < tableData.length; i++) {
-      if (ORRow === i) continue;
-      if (tableData[i].Duplicate === "Yes") continue;
-      if (tableData[i][COPColumn] === ORValue) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   async function ProcessData() {
     setLoading(true);
@@ -94,7 +84,6 @@ export default function Modal() {
       return newTableData;
     });
 
-    console.log(tableData);
     for (let index = 0; index < tableData.length; index++) {
       if (index === 0) {
         continue;
@@ -123,11 +112,12 @@ export default function Modal() {
           if (tableData[index].Duplicate === "Yes") return newTableData;
           for (let i = 0; i < tableData.length; i++) {
             if (index === i) continue;
-            if (tableData[i][compareColumnRef[0]] === tableData[index][compareColumnRef[2]]) {
-              DuplicateIndex = index;
+            if (tableData[index][compareColumnRef[0]] === tableData[i][compareColumnRef[2]]) {
+              DuplicateIndex = i;
             }
           }
           if (DuplicateIndex !== -1) {
+            console.log("DuplicateIndex", DuplicateIndex);
             newTableData[DuplicateIndex].Duplicate = "Yes";
           }
         } else if (CompareEndOne !== "" && CompareEndTwo !== "" && CompareStartTwo !== "") {
@@ -138,10 +128,10 @@ export default function Modal() {
           for (let i = 0; i < tableData.length; i++) {
             if (index === i) continue;
             if (
-              tableData[i][compareColumnRef[0]] + tableData[i][compareColumnRef[1]] ===
-              tableData[index][compareColumnRef[2]] + tableData[index][compareColumnRef[3]]
+              tableData[index][compareColumnRef[0]] + tableData[index][compareColumnRef[1]] ===
+              tableData[i][compareColumnRef[2]] + tableData[i][compareColumnRef[3]]
             ) {
-              DuplicateIndex = index;
+              DuplicateIndex = i;
             }
           }
           if (DuplicateIndex !== -1) {
@@ -197,7 +187,7 @@ export default function Modal() {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement("a");
                 a.setAttribute("href", url);
-                a.setAttribute("download", `Model_${fileName.length > 18 ? fileName.substring(0, 18) : fileName}.csv`);
+                a.setAttribute("download", `Duplicate_Check_${fileName.length > 18 ? fileName.substring(0, 18) : fileName}.csv`);
                 a.click();
               }}
             >

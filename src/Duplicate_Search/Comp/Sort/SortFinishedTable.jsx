@@ -11,32 +11,32 @@ export default function SortFinishedTable() {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const handleOptionClick = (value) => {
-    let convertedValue;
-    if (value === "Input Model") {
-      convertedValue = "Model";
-    } else if (value === "dcT Make 1") {
-      convertedValue = "dctMakeOne";
-    } else if (value === "dcT Model 1") {
-      convertedValue = "dctModalOne";
-    } else if (value === "Accuracy 1") {
-      convertedValue = "accuracyOne";
-    } else if (value === "Object 1") {
-      convertedValue = "ObjectOne";
-    }
+    // let convertedValue;
+    // if (value === "Input Model") {
+    //   convertedValue = "Model";
+    // } else if (value === "dcT Make 1") {
+    //   convertedValue = "dctMakeOne";
+    // } else if (value === "dcT Model 1") {
+    //   convertedValue = "dctModalOne";
+    // } else if (value === "Accuracy 1") {
+    //   convertedValue = "accuracyOne";
+    // } else if (value === "Object 1") {
+    //   convertedValue = "ObjectOne";
+    // }
 
     if (value === "N/A") {
       return;
-    } else if (SortedOrder === 0 && convertedValue === SortedBy) {
-      setSorted(convertedValue, 1);
+    } else if (SortedOrder === 0 && value === SortedBy) {
+      setSorted(value, 1);
       setSortName(value);
-    } else if (SortedOrder === 1 && convertedValue === SortedBy) {
-      setSorted(convertedValue, -1);
+    } else if (SortedOrder === 1 && value === SortedBy) {
+      setSorted(value, -1);
       setSortName(value);
-    } else if (SortedOrder === -1 && convertedValue === SortedBy) {
+    } else if (SortedOrder === -1 && value === SortedBy) {
       setSortName(`Sort Table`);
       removeSorted();
     } else {
-      setSorted(convertedValue, 1);
+      setSorted(value, 1);
       setSortName(value);
     }
     setIsDropdownOpen(false);
@@ -77,7 +77,7 @@ export default function SortFinishedTable() {
       {isDropdownOpen && (
         <ul className="absolute left-0 top-full mt-2 w-[10rem] bg-white border border-gray-300 rounded-md shadow-lg z-10">
           {/* Dropdown Items */}
-          {["Input Model", "dcT Make 1", "dcT Model 1", "Accuracy 1", "Object 1"].map((item) => (
+          {["#Duplicate"].map((item) => (
             <li
               key={item}
               onClick={() => handleOptionClick(item)} // Handles option click

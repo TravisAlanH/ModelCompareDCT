@@ -1,50 +1,48 @@
 import React from "react";
-import StepZero from "../SOP/Step0_0.png";
-import StepOne from "../SOP/Step1_1.png";
-import StepTwo from "../SOP/Step2_2.png";
-import StepThree from "../SOP/Step3_3.png";
+import StepZero from "../SOP/StepC_0.png";
+import StepOne from "../SOP/StepC_1.png";
+import StepTwo from "../SOP/StepC_2.png";
+import StepThree from "../SOP/StepC_3.png";
 import StepFour from "../SOP/Step4_4.png";
-import Step5_5 from "../SOP/Step5_5.png";
+import StepSOP from "../SOP/Step0_0.png";
 // import { DuplicateSearchStore } from "../../../Store/Store";
 // import { CurrentStepStore } from "../../../Store/Store";
 // import { FileNameStore } from "../../../Store/Store";
 
-export default function SOP() {
+export default function SOPColumn() {
   // const Step = DuplicateSearchStore((state) => state.data.CurrentStep);
   // const fileName = DuplicateSearchStore((state) => state.data.FileName);
   const SOPData = [
     {
       Step: 1,
-      Header: "Duplicate Search Tool Guide",
+      Header: "Column Selection Guide",
       BulletPoints: [
         {
-          Main: "Detect Duplicate Items within a .xlsx document based on:",
-          Additional: [
-            `Single Column (i.e., data against itself)`,
-            `Two Columns (i.e., data against a different column)`,
-            `Four Columns (i.e., two columns against two column combination)`,
-          ],
+          Main: "Setting Columns for Duplicate Search comparisons",
+          Additional: [`Single Column (Step 2)`, `Two Columns (Step 3)`, `Four Columns (Step 4)`],
         },
-        { Main: `Return original data with New column (A) with duplicate flag "Yes"`, Additional: "" },
+        { Main: `Return original data with new column (A) with duplicate flag "Yes"`, Additional: "" },
         { Main: "Sorting and Exporting as Required", Additional: "" },
       ],
       Note: "*Note: Large data sets may require isolating the Checking Column(s) column, or removing excess sheets from your workbook, before processing. Making these changes greatly reduces processing time.",
       img: StepZero,
-      imgNote: `**This SOP is available for reference at any time by selecting the "?" in the top right corner of the tool.`,
+      imgNote: `**This SOP is available for reference at any time by selecting the gray "?" as referanced below.`,
     },
     {
       Step: 2,
-      Header: "Select the .xlsx file to open",
+      Header: "Single Column Duplicate Checking",
       BulletPoints: [
         {
-          Main: `Sheet being processed MUST be the "Active" Sheet in the workbook.`,
+          Main: `For use to check if a single column has duplicates`,
           Additional: [
-            `"Active" Sheet is the sheet you were last using when the workbook was last saved.`,
-            `If workbook contains only one worksheet the "Active" Sheet is defaulted to that single worksheet`,
+            `- Locate the unique column (i.e., Name, Serial Number, Asset tag, ect.).`,
+            `1. Ensure that the "*First" (Red Box) in the first set (Blue Box) is selected.`,
+            `2. Select the Column to be checked (Orange Letter in the table).`,
+            `3. Review the Selected Column (Red Box).`,
           ],
         },
-        { Main: "Only works with .xlsx file extensions", Additional: "" },
-        { Main: "Resave your Excel file using .xlsx as needed", Additional: "" },
+        { Main: "No other options are needed for Single Column Selection", Additional: "" },
+        { Main: "Open Process Contine from Tool SOP", Additional: "" },
       ],
       Note: "*Note: No data is saved or maintained after closing this tool",
       img: StepOne,
@@ -52,36 +50,69 @@ export default function SOP() {
     },
     {
       Step: 3,
-      Header: "Select the Column(s) that contain the data to be checked",
+      Header: "Double Column Duplicate Checking",
       BulletPoints: [
         {
-          Main: `Select the Column(s) to be checked for duplicates`,
+          Main: `For use to check if a single column has duplicates in a differnt column`,
+          Additional: "",
+        },
+        {
+          Main: `Set First Column`,
           Additional: [
-            `Orange box will be around current column Setting`,
-            `Setting only the "*First" does a single column check`,
-            `Setting "*First" and "*First" does a two column check`,
-            `Setting All does a Two column agaist a Two column combination`,
+            `- Locate the unique columns (i.e., Name, Serial Number, Asset tag, ect.).`,
+            `1. Ensure that the "*First" (Red Box) in the first set (Blue Box) is selected.`,
+            `2. Select the origin Column to be checked (Orange Letter in the table).`,
+            `5. Review the Selected Column (Red Box).`,
           ],
         },
-        { Main: `The first "*First" must be selected`, Additional: "" },
+        {
+          Main: `Set Second Column`,
+          Additional: [
+            `- Locate the unique columns (i.e., Name, Serial Number, Asset tag, ect.).`,
+            `1. Ensure that the "*First" (Green Box) in the second set (Black Box) is selected.`,
+            `2. Select the compare Column to be checked (Orange Letter in the table).`,
+            `3. Review the Selected Column (Green Box).`,
+          ],
+        },
+        { Main: "No other options are needed for Single Column Selection", Additional: "" },
+        { Main: "Open Process Contine from Tool SOP", Additional: "" },
       ],
-      Note: "*Note: Depending on Data size this may take up to 10 Seconds for column to highlight",
+      Note: "",
       img: StepTwo,
-      imgNote: "**Additional Information on this process is avalable by selecting the gray '?' as seen below",
+      imgNote: "",
     },
     {
       Step: 4,
-      Header: "Select Open Process",
+      Header: "Four Column Duplicate Checking",
       BulletPoints: [
         {
-          Main: `This is only availble after the Column(s) are selected`,
+          Main: `For use to check if a Set of two columns has duplicates in a differnt set of two columns`,
           Additional: "",
         },
         {
-          Main: `The Duplicate Column is added at this time, no data is processed at time time`,
-          Additional: "",
+          Main: `Set First Columns`,
+          Additional: [
+            `- Locate the unique columns (i.e., Device Name, Port, ect.).`,
+            `1. Ensure that the "*First" in the first set (Blue Box) is selected.`,
+            `--- Set the first column to be checked (Orange Letter in the table).`,
+            `2. Ensure that the "Second" in the first set (Blue Box) is selected.`,
+            `--- Set the second column to be checked (Orange Letter in the table).`,
+            `3. Review the Selected Columns (Blue Box).`,
+          ],
         },
-        { Main: "A new Window will open containing Data", Additional: "" },
+        {
+          Main: `Set Second Columns`,
+          Additional: [
+            `- Locate the unique columns (i.e., Device Name, Port, ect.).`,
+            `1. Ensure that the "*First" in the second set (Black Box) is selected.`,
+            `--- Set the first column to be checked (Orange Letter in the table).`,
+            `2. Ensure that the "Second" in the second set (Black Box) is selected.`,
+            `--- Set the second column to be checked (Orange Letter in the table).`,
+            `3. Review the Selected Columns (Black Box).`,
+          ],
+        },
+        { Main: "No other options are needed for Single Column Selection", Additional: "" },
+        { Main: "Open Process Contine from Tool SOP", Additional: "" },
       ],
       Note: "",
       img: StepThree,
@@ -89,35 +120,11 @@ export default function SOP() {
     },
     {
       Step: 5,
-      Header: "After Reviewing, Select Begin Process",
-      BulletPoints: [
-        { Main: "This will do comparisons to the column(s) selected in the previous steps.", Additional: "" },
-        { Main: "Depending on Data Size there may be a delay in processing.", Additional: "" },
-        {
-          Main: `The provided Data is as follows ("Duplicate?" column):`,
-          Additional: [`"Yes": Noted in the second instance of the duplicate data`, `"*Blank" : No Duplicate Found`],
-        },
-      ],
+      Header: "Conitue Standard SOP",
+      BulletPoints: [{ Main: "After Selections are Made Contine processing as Normal", Additional: "" }],
       Note: "",
-      img: StepFour,
-      imgNote: "",
-    },
-    {
-      Step: 6,
-      Header: "Optional: Sort and Export",
-      BulletPoints: [
-        {
-          Main: `Export will create an Export .xlsx file of all provided data for use.`,
-          Additional: [`File Name: Duplicate_Check_(Your Provided File Name).xlsx`, `Will be saved to your Downloads Folder`],
-        },
-        {
-          Main: `Sort will sort the data based on the selected type`,
-          Additional: [`Sort by "Duplicate?" to see all duplicates together`],
-        },
-      ],
-      Note: "",
-      img: Step5_5,
-      imgNote: "**Sorting may move the .xlsx headers to a different row, this is normal to account for data without headers ",
+      img: StepSOP,
+      imgNote: `**Stardard SOP is available for reference at any time by selecting the "?" in the top right corner of the tool.`,
     },
   ];
 

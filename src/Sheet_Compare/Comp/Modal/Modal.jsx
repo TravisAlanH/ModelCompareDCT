@@ -41,7 +41,6 @@ export default function Modal() {
   }
 
   const combineData = () => {
-    let testingOrderInNewData = [];
     let inOldNotNew = [];
     let inNewNotOld = [];
     let newDataCopy = Object.keys(JSON.parse(JSON.stringify(newData))).filter((item) => item.includes(newColumnCompare));

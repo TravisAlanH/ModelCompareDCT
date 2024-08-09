@@ -45,7 +45,7 @@ export default function SOP() {
     },
     {
       Step: 3,
-      Header: "Select the Colum that contains the Model Data",
+      Header: "Select the Column that contains the Model Data",
       BulletPoints: [
         {
           Main: `Select the Orange Column Letter to Select the Column`,

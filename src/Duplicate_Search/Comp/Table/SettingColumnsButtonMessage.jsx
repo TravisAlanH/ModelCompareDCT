@@ -8,9 +8,9 @@ export default function SettingColumnsButtonMessage() {
       </div>
       <div>
         <button
-          className="bg-orange-400 text-white font-bold rounded-full h-[2rem] w-[2rem] text-xl"
+          className="bg-gray-200 font-bold rounded-full h-[2rem] w-[2rem] text-xl"
           onClick={() => {
-            document.getElementById("SOPModalCompare").style.display = "block";
+            document.getElementById("SOPDuplicateColumnSelection").style.display = "block";
           }}
         >
           ?

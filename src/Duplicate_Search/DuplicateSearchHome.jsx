@@ -9,6 +9,8 @@ import SOP from "./SOP/SOP";
 import Modal from "./Comp/Modal/Modal";
 import SOPModal from "./Comp/Modal/SOPModal";
 import Footer from "./Comp/Footer/Footer";
+import SOPColumnModal from "./Comp/Modal/SOPColumnModal";
+import SOPColumn from "./SOP/SOPColumn";
 
 export default function ModelCompareHome({ setViewPage }) {
   const setCurrentStep = DuplicateSearchStore((state) => state.setCurrentStep);
@@ -30,12 +32,12 @@ export default function ModelCompareHome({ setViewPage }) {
   return (
     <>
       <Header setViewPage={setViewPage} />
-      <div className="p-3 flex flex-col justify-center items-center">
+      {/* <div className="p-3 flex flex-col justify-center items-center">
         <p className="text-xl font-bold">{`Duplicate Seaching => Output: Origin Data with new Duplicate Column`}</p>
         <p className="text-xl font-bold">{`Multiple Column Searching (ie: Name and Port vs Name and Port)`}</p>
         <p className="text-xl font-bold">BUILD IN PROGRESS...</p>
         <p className="font-bold">{`*** Click Sunbird Logo or Home (Upper right) to go Home ***`}</p>
-      </div>
+      </div> */}
       {fileName != "" ? <SOPButton /> : null}
       <div className="flex flex-col w-full items-center">
         <div className="flex flex-row justify-center gap-5 py-2">
@@ -74,7 +76,7 @@ export default function ModelCompareHome({ setViewPage }) {
         ) : null}
         <Modal />
         <SOPModal />
-
+        <SOPColumnModal />
         <Footer />
       </div>
     </>

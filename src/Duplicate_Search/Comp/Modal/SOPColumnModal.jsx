@@ -1,22 +1,22 @@
 import React from "react";
-import SOP from "../../SOP/SOP";
+import SOPColumn from "../../SOP/SOPColumn";
 
-export default function SOPModal() {
+export default function SOPColumnModal() {
   return (
-    <div id="SOPDuplicateToolCompare" className="modal">
+    <div id="SOPDuplicateColumnSelection" className="modal">
       <div className="modal-content-sop flex flex-col">
         <div className="flex flex-row justify-end">
           <span
             className="close"
             onClick={() => {
-              document.getElementById("SOPDuplicateToolCompare").style.display = "none";
+              document.getElementById("SOPDuplicateColumnSelection").style.display = "none";
             }}
           >
             &times;
           </span>
         </div>
         <div className="flex flex-row justify-center pt-5 overflow-auto">
-          <SOP />
+          <SOPColumn />
         </div>
       </div>
     </div>

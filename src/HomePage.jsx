@@ -30,7 +30,7 @@ export default function HomePage({ setViewPage }) {
     },
     "Python Input": {
       page: 4,
-      title: "Python Input",
+      title: "**** Python Input **** (Work in Progress)",
       discription: "Create and Use Python tools from .py provided files.",
       icon: <AiOutlinePython className="text-[3.5rem] text-white" />,
       index: 3,

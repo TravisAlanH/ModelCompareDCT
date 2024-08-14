@@ -126,7 +126,7 @@ export default function SOP() {
 
   function StepLayout(index, data) {
     return (
-      <div className="w-50rem bg-[#f1f5f9] rounded-xl flex flex-col gap-5 p-3">
+      <div className="w-50rem bg-[#f1f5f9] rounded-xl flex flex-col gap-5 p-3 shadow-md">
         <div className="flex flex-row gap-3 items-center">
           {StepNumber(data.Step)}
           {StepHeader(data)}

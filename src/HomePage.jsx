@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "./Assets/Logo.png";
 import { MdCompareArrows } from "react-icons/md";
 import { MdCompare } from "react-icons/md";
-import { AiOutlineColumnHeight } from "react-icons/ai";
+import { AiOutlineColumnHeight, AiOutlinePython } from "react-icons/ai";
 
 export default function HomePage({ setViewPage }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,6 +27,13 @@ export default function HomePage({ setViewPage }) {
       discription: "Generates Duplicate comparisons between Single, Multiple, and Combined Columns from .xlsx data.",
       icon: <AiOutlineColumnHeight className="text-[3.5rem] text-white" />,
       index: 2,
+    },
+    "Python Input": {
+      page: 4,
+      title: "Python Input",
+      discription: "Create and Use Python tools from .py provided files.",
+      icon: <AiOutlinePython className="text-[3.5rem] text-white" />,
+      index: 3,
     },
   });
 

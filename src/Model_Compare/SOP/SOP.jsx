@@ -51,7 +51,7 @@ export default function SOP() {
           Main: `Select the Orange Column Letter to Select the Column`,
           Additional: "",
         },
-        { Main: "The Selected Column with Highlight.", Additional: "" },
+        { Main: "The Selected Column will Highlight.", Additional: "" },
       ],
       Note: "*Note: Depending on Data size this may take up to 10 Seconds for column to highlight",
       img: StepTwo,
@@ -116,7 +116,7 @@ export default function SOP() {
 
   function StepLayout(index, data) {
     return (
-      <div className="w-50rem bg-[#f1f5f9] rounded-xl flex flex-col gap-5 p-3">
+      <div className="w-50rem bg-[#f1f5f9] rounded-xl flex flex-col gap-5 p-3 shadow-md">
         <div className="flex flex-row gap-3 items-center">
           {StepNumber(data.Step)}
           {StepHeader(data)}

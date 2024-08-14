@@ -74,7 +74,7 @@ export default function SOPColumn() {
             `3. Review the Selected Column (Green Box).`,
           ],
         },
-        { Main: "No other options are needed for Single Column Selection", Additional: "" },
+        { Main: "No other options are needed for Two Column Selection", Additional: "" },
         { Main: "Open Process Contine from Tool SOP", Additional: "" },
       ],
       Note: "",
@@ -111,7 +111,7 @@ export default function SOPColumn() {
             `3. Review the Selected Columns (Black Box).`,
           ],
         },
-        { Main: "No other options are needed for Single Column Selection", Additional: "" },
+        { Main: "No other options are needed for Four Column Selection", Additional: "" },
         { Main: "Open Process Contine from Tool SOP", Additional: "" },
       ],
       Note: "",
@@ -138,7 +138,7 @@ export default function SOPColumn() {
 
   function StepLayout(index, data) {
     return (
-      <div className="w-50rem bg-[#f1f5f9] rounded-xl flex flex-col gap-5 p-3">
+      <div className="w-50rem bg-[#f1f5f9] rounded-xl flex flex-col gap-5 p-3 shadow-md">
         <div className="flex flex-row gap-3 items-center">
           {StepNumber(data.Step)}
           {StepHeader(data)}

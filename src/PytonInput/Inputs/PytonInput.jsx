@@ -29,7 +29,7 @@ export default function PythonInput() {
       //! This is a workaround for the issue where pyodide.loadPackage() doesn't work in Vite
       //! I will need to review packages in the code as they are inputted by the user to insure they are loaded.
       //!!!!! MUST DETERMINE BEST WAY TO GIVE FEEDBACK TO USER ON WHAT PACKAGES ARE MISSING AND LOAD TIMES
-      await pyodide.loadPackage("openpyxl");
+      //   await pyodide.loadPackage("openpyxl");
 
       // Redirect stdout and stderr to capture output
       pyodide.runPython(`
@@ -70,15 +70,15 @@ export default function PythonInput() {
       <div className="flex flex-col w-[60rem] h-[30rem]">
         <textarea id="PythonCode" className="w-full h-[90%] bg-[#000000dc] text-white p-4 rounded-lg" placeholder="Enter Python code here..." />
         <div className="flex flex-row justify-end">
-          <button className="bg-orange-400 text-white font-bold py-2 px-4 rounded w-[5rem] mt-4" onClick={runPython} disabled={loading}>
+          <button className="bg-orange-400 text-white font-bold py-2 px-4 rounded mt-4" onClick={runPython} disabled={loading}>
             {loading ? "Running..." : "Run"}
           </button>
         </div>
-        <div id="output" className="w-full h-[50%] bg-[#000000dc] text-white p-4 rounded-lg mt-4 overflow-y-auto">
-          {output}
+        <div className="">
+          <textarea id="Output" className="w-full h-[90%] bg-[#000000dc] text-white p-4 rounded-lg" placeholder={output == "" ? "Output..." : output} />
         </div>
-        <div id="error" className="w-full h-[10rem] bg-[#000000dc] text-white p-4 rounded-lg mt-4 overflow-y-auto">
-          {error}
+        <div id="error" className="">
+          <textarea id="Error" className="w-full h-[90%] bg-[#000000dc] text-white p-4 rounded-lg" placeholder={error == "" ? "Error?" : error} />
         </div>
       </div>
     </div>

@@ -4,6 +4,8 @@ import { MdCompareArrows } from "react-icons/md";
 import { MdCompare } from "react-icons/md";
 import { AiOutlineColumnHeight, AiOutlinePython } from "react-icons/ai";
 
+// 375,000
+
 export default function HomePage({ setViewPage }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [Pages, setPages] = useState({

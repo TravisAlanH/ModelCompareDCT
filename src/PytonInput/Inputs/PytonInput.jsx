@@ -69,8 +69,9 @@ export default function PythonInput() {
     <div className="flex flex-row justify-center p-4">
       <div className="flex flex-col w-[60rem] h-[30rem]">
         <textarea id="PythonCode" className="w-full h-[90%] bg-[#000000dc] text-white p-4 rounded-lg" placeholder="Enter Python code here..." />
-        <div className="flex flex-row justify-end">
-          <button className="bg-orange-400 text-white font-bold py-2 px-4 rounded mt-4" onClick={runPython} disabled={loading}>
+        <div className="flex flex-row justify-between">
+          <input type="file" className="bg-orange-400 text-white font-bold py-2 px-4 rounded my-4" />
+          <button className="bg-orange-400 text-white font-bold py-2 px-4 rounded my-4" onClick={runPython} disabled={loading}>
             {loading ? "Running..." : "Run"}
           </button>
         </div>
@@ -79,6 +80,12 @@ export default function PythonInput() {
         </div>
         <div id="error" className="">
           <textarea id="Error" className="w-full h-[90%] bg-[#000000dc] text-white p-4 rounded-lg" placeholder={error == "" ? "Error?" : error} />
+        </div>
+      </div>
+      <div className="w-[10rem] border-2 mx-4">
+        <div className="border-2 m-2">
+          <h1>Python</h1>
+          <ul></ul>
         </div>
       </div>
     </div>
